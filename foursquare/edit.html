@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html class="fuelux">
+<head>
+    <meta charset="UTF-8">
+    <title>Gear: Foursquare Nearby Venues</title>
+
+    <link href="//fuelcdn.com/fuelux-imh/2.2/css/fuelux.css" rel="stylesheet">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
+    <script src="../fuelux-gearapi-master/dist/gear.js" type="text/javascript"></script>
+    <script src="../fuelux-master/dist/loader.min.js" type="text/javascript"></script>
+<!--    <script src="../fuelux-master/lib/require.js" type="text/javascript"></script>
+-->    <script src="../fuelux-master/dist/spinner.js" type="text/javascript"></script>
+    <script src="../fuelux-master/dist/checkbox.js" type="text/javascript"></script>
+    <script src="../fuelux-master/dist/pillbox.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+			
+			function getHtmlView(jsonData, showData, content) {
+				content += '<ul class="clearfix">';
+	
+				$.each(jsonData.response.venues, function(i,venue){
+					content += '<li>';
+					content += '<strong>Name: </strong><a href="' + venue.canonicalUrl + '">' + venue.name + '</a><br />';
+	
+					if (showData.showCategory) {
+						$.each(this.categories, function(i,category){
+							content += '<strong>Category: </strong>' + category.name + '<br />';
+						});
+					}
+					if ( venue.contact.formattedPhone && showData.showPhone ) {
+						content += '<strong>Phone: </strong>' + venue.contact.formattedPhone + '<br />';
+					}
+					if (showData.showDistance) {
+						content += '<strong>Distance: </strong>' + venue.location.distance + ' meters<br />';
+					}
+					if (showData.showAddress) {
+						content += '<strong>Address: </strong>' + venue.location.address + ', ' + venue.location.city + ', ' + venue.location.state + ' ' + venue.location.postalCode + ' ' + venue.location.cc + '<br />';
+					}
+					if (showData.showVerified) {
+						if ( venue.verified) {
+							content += '<strong>Verified?: </strong>Yes<br />';
+						} else {
+							content += '<strong>Verified?: </strong>No<br />';
+						}
+					}
+					if (showData.showCheckins) {
+						content += '<strong>Checkins: </strong>' + venue.stats.checkinsCount + '<br />';
+					}
+					if (showData.showUsers) {
+						content += '<strong>Users: </strong>' + venue.stats.usersCount + '<br />';
+					}
+					if (showData.showTips) {
+						content += '<strong>Tips: </strong>' + venue.stats.tipCount + '<br />';
+					}
+					if ( showData.showUrl && venue.url ) {
+						content += '<strong>Url: </strong><a href="' + venue.url + '">' + venue.url + '</a><br />';
+					}
+					if (showData.showLikes) {
+						content += '<strong>Likes: </strong>' + venue.likes.count + '<br />';
+					}
+					if (showData.showSpecials) {
+						content += '<strong>Specials: </strong>' + venue.specials.count + '<br />';
+					}
+					
+					content += '</li>';
+				
+				});
+				
+				content += '</ul>';
+				
+				return content;
+			}
+			
+			function getTextView(jsonData, showData, content) {
+	
+				$.each(jsonData.response.venues, function(i,venue){
+					content += 'Name: ' + venue.name + '\r\n';
+					content += 'Page Url: ' + venue.canonicalUrl + '\r\n';
+	
+					if (showData.showCategory) {
+						$.each(this.categories, function(i,category){
+							content += 'Category: ' + category.name + '\r\n';
+						});
+					}
+					if ( venue.contact.formattedPhone && showData.showPhone ) {
+						content += 'Phone: ' + venue.contact.formattedPhone + '\r\n';
+					}
+					if (showData.showDistance) {
+						content += 'Distance: ' + venue.location.distance + '\r\n';
+					}
+					if (showData.showAddress) {
+						content += 'Address: ' + venue.location.address + ', ' + venue.location.city + ', ' + venue.location.state + ' ' + venue.location.postalCode + ' ' + venue.location.cc + '\r\n';
+					}
+					if (showData.showVerified) {
+						if ( venue.verified) {
+							content += 'Verified?: Yes\r\n';
+						} else {
+							content += 'Verified?: No\r\n';
+						}
+					}
+					if (showData.showCheckins) {
+						content += 'Checkins: ' + venue.stats.checkinsCount + '\r\n';
+					}
+					if (showData.showUsers) {
+						content += 'Users: ' + venue.stats.usersCount + '\r\n';
+					}
+					if (showData.showTips) {
+						content += 'Tips: ' + venue.stats.tipCount + '\r\n';
+					}
+					if ( showData.showUrl && venue.url ) {
+						content += 'Url: ' + venue.url + '\r\n';
+					}
+					if (showData.showLikes) {
+						content += 'Likes: ' + venue.likes.count + '\r\n';
+					}
+					if (showData.showSpecials) {
+						content += 'Specials: ' + venue.specials.count + '\r\n';
+					}
+					
+					content += '\r\n';
+				
+				});
+				
+				content += '</ul>';
+				
+				return content;
+			}
+			
+            FUELUX_EDITOR.trigger('fetch');
+
+            FUELUX_EDITOR.trigger('resize', { height: 520, width: 480 });
+
+            FUELUX_EDITOR.on('receive', function(e, details){
+                var gearData = details.gearData;
+				
+                $('#lat').val(gearData.lat);
+                $('#lng').val(gearData.lng);
+                $('#radius').spinner('value', gearData.radius);
+                $('#limit').spinner('value', gearData.limit);
+//				need to handle categories, exCategories
+//				need to handle checkboxes
+
+				$('#categories').on('click', 'li', function(){
+					$('#exCategories ul').append('<li data-value="' + $(this).attr('data-value') + '">' + $(this).html() + '</li>');
+				});
+				$('#exCategories').on('click', 'li', function(){
+					$('#categories ul').append('<li data-value="' + $(this).attr('data-value') + '" class="status-success">' + $(this).html() + '</li>');
+				});
+				
+                FUELUX_EDITOR.trigger('ready');
+            });
+
+            FUELUX_EDITOR.on('accept', function(e, details){
+
+				var lat = $('#lat').val(),
+					lng = $('#lng').val(),
+					radius = $('#radius').spinner('value'),
+					limit = $('#limit').spinner('value');
+					categories = $('#categories').pillbox('items'),
+					exCategories = $('#exCategories').pillbox('items'),
+					showData = {
+						showCategory : $('#showCategory').is(':checked'),
+						showPhone : $('#showPhone').is(':checked'),
+						showDistance : $('#showDistance').is(':checked'),
+						showAddress : $('#showAddress').is(':checked'),
+						showVerified : $('#showVerified').is(':checked'),
+						showCheckins : $('#showCheckins').is(':checked'),
+						showUsers : $('#showUsers').is(':checked'),
+						showTips : $('#showTips').is(':checked'),
+						showUrl : $('#showUrl').is(':checked'),
+						showLikes : $('#showLikes').is(':checked'),
+						showSpecials : $('#showSpecials').is(':checked')
+					},
+					categoryStr = '',
+					content = '',
+					gearData = {
+						lat: lat,
+						lng: lng,
+						radius: radius,
+						limit: limit
+/*						categories: categories,
+						exCategories: exCategories,
+						showData: showData
+*/					};
+				
+				if (categories !== null) {
+					$.each(categories, function( key, value ) {
+						categoryStr += value.value + ',';
+					});
+				}
+
+				
+				if ((lat == '') || (lng == '')) {
+					
+					content = '<div class="well text-error">Missing or incorrect info.</div>';
+					
+					FUELUX_EDITOR.trigger('done', { content: content, gearData: gearData });
+
+				} else {
+					$.getJSON(
+						"https://api.foursquare.com/v2/venues/search?", 
+						{ 
+							"ll": lat + ',' + lng,
+							"intent": "browse",
+							"radius": radius,
+							"limit": limit,
+							"categoryId": categoryStr,
+							"oauth_token": "Q4ADTMWI3W0DYRZK4CPRK4WCJOBR1FSPMMAPT4AGDTVFEFP4",
+							"v": "20121016"
+						},
+						function(jsonData) {
+							content += getHtmlView(jsonData, showData, content);
+							content += getTextView(jsonData, showData, content);
+
+							FUELUX_EDITOR.trigger('done', { content: content, gearData: gearData });
+						}
+					);
+				}
+            });
+			$('#radius').spinner({
+				'value': 100,
+				'min': 1,
+				'max': 100000,
+				'speed': 'fast'
+			});
+			$('#limit').spinner({
+				'value': 4,
+				'min': 1,
+				'max': 50,
+				'speed': 'slow'
+			});
+		});
+    </script>
+
+	<style>
+		.fuelux body {
+			padding: 20px;
+			background: #f3f3f3;
+		}
+		.fuelux .form-control {
+			float: left;
+		}
+		.fuelux .form-control + .form-control {
+			margin-left: 10px;
+		}
+		.fuelux #venues ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		.fuelux #venues li {
+			float: left;
+			width: 49%;
+			margin-bottom: 1em;
+			margin-right: 1%;
+		}
+		.fuelux .pillbox {
+			width: 194px;
+			margin-bottom: 10px;
+			border: 1px solid #BBBBBB;
+			border-radius: 4px 4px 4px 4px;
+			background: #fff;
+		}
+		.fuelux option:disabled {
+			color: #999;
+		}
+	</style>
+</head>
+<body>
+    <h1>Foursquare Venues</h1>
+	<p>Create the following embedded Foursquare venues list by completing the form.</p>
+    <div id="venues" class="well"></div>
+<script>
+	$.getJSON(
+		"https://api.foursquare.com/v2/venues/search?", 
+		{ 
+			"ll": '40.725568,-73.997447',
+			"intent": "browse",
+			"radius": '100',
+			"limit": '4',
+			"categoryId": '4d4b7104d754a06370d81259,4d4b7105d754a06374d81259,4d4b7105d754a06376d81259,4d4b7105d754a06377d81259',
+			"oauth_token": "Q4ADTMWI3W0DYRZK4CPRK4WCJOBR1FSPMMAPT4AGDTVFEFP4",
+			"v": "20121016"
+		},
+		function(jsonData) {
+			var showCategory = true,
+				showPhone = false,
+				showDistance = true,
+				showAddress = false,
+				showVerified = false,
+				showCheckins = false,
+				showUsers = false,
+				showTips = false,
+				showUrl = false,
+				showLikes = false,
+				showSpecials = false,
+				content = '<ul class="clearfix">';
+
+			$.each(jsonData.response.venues, function(i,venue){
+				content += '<li>';
+				content += '<strong>Name: </strong><a href="' + venue.canonicalUrl + '">' + venue.name + '</a><br />';
+
+				if (showCategory) {
+					$.each(this.categories, function(i,category){
+						content += '<strong>Category: </strong>' + category.name + '<br />';
+					});
+				}
+				if ( venue.contact.formattedPhone && showPhone ) {
+					content += '<strong>Phone: </strong>' + venue.contact.formattedPhone + '<br />';
+				}
+				if (showDistance) {
+					content += '<strong>Distance: </strong>' + venue.location.distance + ' meters<br />';
+				}
+				if (showAddress) {
+					content += '<strong>Address: </strong>' + venue.location.address + ', ' + venue.location.city + ', ' + venue.location.state + ' ' + venue.location.postalCode + ' ' + venue.location.cc + '<br />';
+				}
+				if (showVerified) {
+					if ( venue.verified) {
+						content += '<strong>Verified?: </strong>Yes<br />';
+					} else {
+						content += '<strong>Verified?: </strong>No<br />';
+					}
+				}
+				if (showCheckins) {
+					content += '<strong>Checkins: </strong>' + venue.stats.checkinsCount + '<br />';
+				}
+				if (showUsers) {
+					content += '<strong>Users: </strong>' + venue.stats.usersCount + '<br />';
+				}
+				if (showTips) {
+					content += '<strong>Tips: </strong>' + venue.stats.tipCount + '<br />';
+				}
+				if ( showUrl && venue.url ) {
+					content += '<strong>Url: </strong><a href="' + venue.url + '">' + venue.url + '</a><br />';
+				}
+				if (showLikes) {
+					content += '<strong>Likes: </strong>' + venue.likes.count + '<br />';
+				}
+				if (showSpecials) {
+					content += '<strong>Specials: </strong>' + venue.specials.count + '<br />';
+				}
+				
+				content += '</li>';
+			
+			});
+			
+			content += '</ul>';
+
+			$('#venues').html(content);
+		}
+	);
+</script>
+    <div class="clearfix">
+    
+    	<div class="clearfix">
+            <div class="form-control">
+                <label for="lat">Latitude (-90 to 90):</label>
+                <div class="input-append">
+                    <input id="lat" name="lat" type="text" placeholder="40.725568" class="input-small" />
+                    <span class="add-on">&deg;</span>
+                </div>
+            </div>    
+            <div class="form-control">
+                <label for="lng">Longitude (-180 to 180):</label>
+                <div class="input-append">
+                    <input id="lng" name="lng" type="text" placeholder="-73.997447" class="input-small" />
+                    <span class="add-on">&deg;</span>
+                </div>
+            </div>
+		</div>
+        
+        <br />
+        
+        <div class="clearfix">
+            <div class="form-control">
+                <label for="radius">Radius (meters):</label>
+                <div class="spinner" id="radius">
+                    <input type="text" class="input-mini spinner-input">
+                    <div class="spinner-buttons  btn-group btn-group-vertical">
+                        <button class="btn spinner-up">
+                            <i class="icon-chevron-up"></i>
+                        </button>
+                        <button class="btn spinner-down">
+                            <i class="icon-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>        
+            </div>
+    
+            <div class="form-control">
+                <label for="limit">Results to Return:</label>
+                <div class="spinner" id="limit">
+                    <input type="text" class="input-mini spinner-input">
+                    <div class="spinner-buttons  btn-group btn-group-vertical">
+                        <button class="btn spinner-up">
+                            <i class="icon-chevron-up"></i>
+                        </button>
+                        <button class="btn spinner-down">
+                            <i class="icon-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>        
+            </div>
+        </div>
+        
+        <br />
+        
+        <div class="clearfix">
+        <label>Information to show:</label>
+            <div class="form-control">
+                <label class="checkbox checkbox-custom"><input type="checkbox" id="showName" checked="checked" disabled="disabled"><i class="checkbox"></i>Name</label>
+                <label class="checkbox checkbox-custom"><input type="checkbox" id="showCategory" checked="checked"><i class="checkbox"></i>Category</label>
+                <label class="checkbox checkbox-custom"><input type="checkbox" id="showPhone"><i class="checkbox"></i>Phone</label>
+                <label class="checkbox checkbox-custom"><input type="checkbox" id="showDistance" checked="checked"><i class="checkbox"></i>Distance</label>
+			</div>
+            <div class="form-control">
+                <label class="checkbox checkbox-custom"><input type="checkbox" id="showDddress"><i class="checkbox"></i>Address</label>
+                <label class="checkbox checkbox-custom"><input type="checkbox" id="showVerified"><i class="checkbox"></i>Verified Status</label>
+                <label class="checkbox checkbox-custom"><input type="checkbox" id="showCheckins"><i class="checkbox"></i>Checkins</label>
+                <label class="checkbox checkbox-custom"><input type="checkbox" id="showUsers"><i class="checkbox"></i>Users</label>
+			</div>
+            <div class="form-control">
+                <label class="checkbox checkbox-custom"><input type="checkbox" id="showTips"><i class="checkbox"></i>Tips</label>
+                <label class="checkbox checkbox-custom"><input type="checkbox" id="showUrl"><i class="checkbox"></i>URL</label>
+                <label class="checkbox checkbox-custom"><input type="checkbox" id="showLikes"><i class="checkbox"></i>Likes</label>
+                <label class="checkbox checkbox-custom"><input type="checkbox" id="showSpecials"><i class="checkbox"></i>Specials</label>
+			</div>
+        </div>
+        
+        <br />
+        
+        <div class="clearfix">
+        	<div class="form-control">
+                <label for="categories">Included Categories:</label>
+                <div id="categories" class="pillbox">
+                    <ul>
+                        <li data-value="4d4b7104d754a06370d81259" class="status-success">Arts &amp; Entertainment</li>
+                        <li data-value="4d4b7105d754a06374d81259" class="status-success">Food</li>
+                        <li data-value="4d4b7105d754a06376d81259" class="status-success">Nightlife Spot</li>
+                        <li data-value="4d4b7105d754a06377d81259" class="status-success">Outdoors &amp; Recreation</li>
+                    </ul>
+                </div>
+			</div>
+        	<div class="form-control">
+                <label for="exCategories">Excluded Categories:</label>
+                <div id="exCategories" class="pillbox">
+                    <ul>
+                        <li data-value="4d4b7105d754a06372d81259">College &amp; University</li>
+                        <li data-value="4d4b7105d754a06375d81259">Professional &amp; Other Places</li>
+                        <li data-value="4e67e38e036454776db1fb3a">Residence</li>
+                        <li data-value="4d4b7105d754a06378d81259">Shop &amp; Service</li>
+                        <li data-value="4d4b7105d754a06379d81259">Travel &amp; Transport</li>
+                    </ul>
+                </div>
+			</div>
+        </div>
+        
+    </div>
+</script>
+
+</body>
+</html>
