@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html class="fuelux">
 <head>
-    <meta charset="UTF-8">
-    <title>Gear: YouTube Video</title>
+	<meta charset="UTF-8">
+	<title>Gear: YouTube Video</title>
 
-    <link href="//fuelcdn.com/fuelux-imh/2.2/css/fuelux.css" rel="stylesheet">
+	<link href="//fuelcdn.com/fuelux-imh/2.2/css/fuelux.css" rel="stylesheet">
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
-    <script src="../fuelux-gearapi-master/dist/gear.js" type="text/javascript"></script>
-    <script src="../fuelux-master/dist/loader.min.js" type="text/javascript"></script>
-    <script src="../fuelux-master/lib/require.js" type="text/javascript"></script>
-    <script src="../fuelux-master/dist/spinner.js" type="text/javascript"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
+	<script src="//internalcdn.xexacttargetapps.com/fuelux-gearapi/0.0.18/gear.min.js" type="text/javascript"></script>
+	<script src="//fuelcdn.com/fuelux/2.2/loader.min.js" type="text/javascript"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
+	<script type="text/javascript">
+		$(document).ready(function(){
 			
 			function getWebView(gearData, jsonData) {
 				return '<iframe width="' + gearData.width + '" height="' + gearData.height + '" src="http://www.youtube.com/embed/' + gearData.vId + '" frameborder="0" title="' + jsonData.data.title + '"></iframe>';
@@ -27,30 +25,30 @@
 				return jsonData.data.title + ': http://www.youtube.com/watch?v=' + gearData.vId;
 			}
 			
-            FUELUX_EDITOR.trigger('fetch');
+			FUELUX_EDITOR.trigger('fetch');
 
-            FUELUX_EDITOR.trigger('resize', { height: 470, width: 310 });
+			FUELUX_EDITOR.trigger('resize', { height: 470, width: 310 });
 
-            FUELUX_EDITOR.on('receive', function(e, details){
-                var gearData = details.gearData;
+			FUELUX_EDITOR.on('receive', function(e, details){
+				var gearData = details.gearData;
 
-                $('#playerHeight').spinner('value', gearData.height);
-                $('#vidId').spinner('value', gearData.vId);
-                $('#playerWidth').spinner('value', gearData.width);
+				$('#playerHeight').spinner('value', gearData.height);
+				$('#vidId').spinner('value', gearData.vId);
+				$('#playerWidth').spinner('value', gearData.width);
 
-                FUELUX_EDITOR.trigger('ready');
-            });
+				FUELUX_EDITOR.trigger('ready');
+			});
 
-            FUELUX_EDITOR.on('cancel', function(e, details){
-                FUELUX_EDITOR.trigger('done', { content: details.content, gearData: details.gearData });
-            });
+			FUELUX_EDITOR.on('cancel', function(e, details){
+				FUELUX_EDITOR.trigger('done', { content: details.content, gearData: details.gearData });
+			});
 
-            FUELUX_EDITOR.on('accept', function(e, details){
-                var vId = $('#vidId').val(),
-                	width = $('#playerWidth').spinner('value'),
+			FUELUX_EDITOR.on('accept', function(e, details){
+				var vId = $('#vidId').val(),
+					width = $('#playerWidth').spinner('value'),
 					height = $('#playerHeight').spinner('value'),
 					content = '',
-                	gearData = {
+					gearData = {
 						width: width,
 						height: height,
 						vId: vId
@@ -74,7 +72,7 @@
 						FUELUX_EDITOR.trigger('done', { content: content, gearData: gearData });
 					});
 				}
-            });
+			});
 
 			$('#playerWidth').spinner({
 				'value': 267,
@@ -86,8 +84,8 @@
 				'min': 200,
 				'speed': 'fast'
 			});
-        });
-    </script>
+		});
+	</script>
 	
 	<style>
 		.fuelux body {
@@ -100,45 +98,45 @@
 	</style>
 </head>
 <body>
-    <h1>YouTube Video</h1>
+	<h1>YouTube Video</h1>
 	<p>Create the following embedded YouTube video by completing the form.</p>
-    <iframe width="267" height="200" src="http://www.youtube.com/embed/_YUugB4IUl4" frameborder="0" allowfullscreen></iframe>
-    <br /><br />
-    <div class="clearfix">
-        <label>Video ID: </label><input type="text" id="vidId" placeholder="_YUugB4IUl4" />
-        
-        <div>
-            <div class="form-control">
-                <label>Width:</label>
-                <div class="spinner" id="playerWidth">
-                    <input type="text" class="input-mini spinner-input">
-                    <div class="spinner-buttons  btn-group btn-group-vertical">
-                        <button class="btn spinner-up">
-                            <i class="icon-chevron-up"></i>
-                        </button>
-                        <button class="btn spinner-down">
-                            <i class="icon-chevron-down"></i>
-                        </button>
-                    </div>
-                </div>        
-            </div>
-    
-            <div class="form-control">
-                <label>Height:</label>
-                <div class="spinner" id="playerHeight">
-                    <input type="text" class="input-mini spinner-input">
-                    <div class="spinner-buttons  btn-group btn-group-vertical">
-                        <button class="btn spinner-up">
-                            <i class="icon-chevron-up"></i>
-                        </button>
-                        <button class="btn spinner-down">
-                            <i class="icon-chevron-down"></i>
-                        </button>
-                    </div>
-                </div>        
-            </div>
+	<iframe width="267" height="200" src="http://www.youtube.com/embed/_YUugB4IUl4" frameborder="0" allowfullscreen></iframe>
+	<br /><br />
+	<div class="clearfix">
+		<label>Video ID: </label><input type="text" id="vidId" placeholder="_YUugB4IUl4" />
+		
+		<div>
+			<div class="form-control">
+				<label>Width:</label>
+				<div class="spinner" id="playerWidth">
+					<input type="text" class="input-mini spinner-input">
+					<div class="spinner-buttons	 btn-group btn-group-vertical">
+						<button class="btn spinner-up">
+							<i class="icon-chevron-up"></i>
+						</button>
+						<button class="btn spinner-down">
+							<i class="icon-chevron-down"></i>
+						</button>
+					</div>
+				</div>		  
+			</div>
+	
+			<div class="form-control">
+				<label>Height:</label>
+				<div class="spinner" id="playerHeight">
+					<input type="text" class="input-mini spinner-input">
+					<div class="spinner-buttons	 btn-group btn-group-vertical">
+						<button class="btn spinner-up">
+							<i class="icon-chevron-up"></i>
+						</button>
+						<button class="btn spinner-down">
+							<i class="icon-chevron-down"></i>
+						</button>
+					</div>
+				</div>		  
+			</div>
 		</div>
-        
-    </div>
+		
+	</div>
 </body>
 </html>

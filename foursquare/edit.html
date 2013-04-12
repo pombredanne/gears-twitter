@@ -1,21 +1,17 @@
 <!DOCTYPE html>
 <html class="fuelux">
 <head>
-    <meta charset="UTF-8">
-    <title>Gear: Foursquare Nearby Venues</title>
+	<meta charset="UTF-8">
+	<title>Gear: Foursquare Nearby Venues</title>
 
-    <link href="//fuelcdn.com/fuelux-imh/2.2/css/fuelux.css" rel="stylesheet">
+	<link href="//fuelcdn.com/fuelux-imh/2.2/css/fuelux.css" rel="stylesheet">
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
-    <script src="../fuelux-gearapi-master/dist/gear.js" type="text/javascript"></script>
-    <script src="../fuelux-master/dist/loader.min.js" type="text/javascript"></script>
-<!--    <script src="../fuelux-master/lib/require.js" type="text/javascript"></script>
--->    <script src="../fuelux-master/dist/spinner.js" type="text/javascript"></script>
-    <script src="../fuelux-master/dist/checkbox.js" type="text/javascript"></script>
-    <script src="../fuelux-master/dist/pillbox.js" type="text/javascript"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
+	<script src="//internalcdn.xexacttargetapps.com/fuelux-gearapi/0.0.18/gear.min.js" type="text/javascript"></script>
+	<script src="//fuelcdn.com/fuelux/2.2/loader.min.js" type="text/javascript"></script>
 
-    <script type="text/javascript">
-        $(document).ready(function(){
+	<script type="text/javascript">
+		$(document).ready(function(){
 			
 			function getHtmlView(jsonData, showData, content) {
 				content += '<ul class="clearfix">';
@@ -128,17 +124,17 @@
 				return content;
 			}
 			
-            FUELUX_EDITOR.trigger('fetch');
+			FUELUX_EDITOR.trigger('fetch');
 
-            FUELUX_EDITOR.trigger('resize', { height: 520, width: 480 });
+			FUELUX_EDITOR.trigger('resize', { height: 520, width: 480 });
 
-            FUELUX_EDITOR.on('receive', function(e, details){
-                var gearData = details.gearData;
+			FUELUX_EDITOR.on('receive', function(e, details){
+				var gearData = details.gearData;
 				
-                $('#lat').val(gearData.lat);
-                $('#lng').val(gearData.lng);
-                $('#radius').spinner('value', gearData.radius);
-                $('#limit').spinner('value', gearData.limit);
+				$('#lat').val(gearData.lat);
+				$('#lng').val(gearData.lng);
+				$('#radius').spinner('value', gearData.radius);
+				$('#limit').spinner('value', gearData.limit);
 //				need to handle categories, exCategories
 //				need to handle checkboxes
 
@@ -149,10 +145,10 @@
 					$('#categories ul').append('<li data-value="' + $(this).attr('data-value') + '" class="status-success">' + $(this).html() + '</li>');
 				});
 				
-                FUELUX_EDITOR.trigger('ready');
-            });
+				FUELUX_EDITOR.trigger('ready');
+			});
 
-            FUELUX_EDITOR.on('accept', function(e, details){
+			FUELUX_EDITOR.on('accept', function(e, details){
 
 				var lat = $('#lat').val(),
 					lng = $('#lng').val(),
@@ -218,7 +214,7 @@
 						}
 					);
 				}
-            });
+			});
 			$('#radius').spinner({
 				'value': 100,
 				'min': 1,
@@ -232,7 +228,7 @@
 				'speed': 'slow'
 			});
 		});
-    </script>
+	</script>
 
 	<style>
 		.fuelux body {
@@ -269,9 +265,9 @@
 	</style>
 </head>
 <body>
-    <h1>Foursquare Venues</h1>
+	<h1>Foursquare Venues</h1>
 	<p>Create the following embedded Foursquare venues list by completing the form.</p>
-    <div id="venues" class="well"></div>
+	<div id="venues" class="well"></div>
 <script>
 	$.getJSON(
 		"https://api.foursquare.com/v2/venues/search?", 
@@ -352,112 +348,112 @@
 		}
 	);
 </script>
-    <div class="clearfix">
-    
-    	<div class="clearfix">
-            <div class="form-control">
-                <label for="lat">Latitude (-90 to 90):</label>
-                <div class="input-append">
-                    <input id="lat" name="lat" type="text" placeholder="40.725568" class="input-small" />
-                    <span class="add-on">&deg;</span>
-                </div>
-            </div>    
-            <div class="form-control">
-                <label for="lng">Longitude (-180 to 180):</label>
-                <div class="input-append">
-                    <input id="lng" name="lng" type="text" placeholder="-73.997447" class="input-small" />
-                    <span class="add-on">&deg;</span>
-                </div>
-            </div>
+	<div class="clearfix">
+	
+		<div class="clearfix">
+			<div class="form-control">
+				<label for="lat">Latitude (-90 to 90):</label>
+				<div class="input-append">
+					<input id="lat" name="lat" type="text" placeholder="40.725568" class="input-small" />
+					<span class="add-on">&deg;</span>
+				</div>
+			</div>	  
+			<div class="form-control">
+				<label for="lng">Longitude (-180 to 180):</label>
+				<div class="input-append">
+					<input id="lng" name="lng" type="text" placeholder="-73.997447" class="input-small" />
+					<span class="add-on">&deg;</span>
+				</div>
+			</div>
 		</div>
-        
-        <br />
-        
-        <div class="clearfix">
-            <div class="form-control">
-                <label for="radius">Radius (meters):</label>
-                <div class="spinner" id="radius">
-                    <input type="text" class="input-mini spinner-input">
-                    <div class="spinner-buttons  btn-group btn-group-vertical">
-                        <button class="btn spinner-up">
-                            <i class="icon-chevron-up"></i>
-                        </button>
-                        <button class="btn spinner-down">
-                            <i class="icon-chevron-down"></i>
-                        </button>
-                    </div>
-                </div>        
-            </div>
-    
-            <div class="form-control">
-                <label for="limit">Results to Return:</label>
-                <div class="spinner" id="limit">
-                    <input type="text" class="input-mini spinner-input">
-                    <div class="spinner-buttons  btn-group btn-group-vertical">
-                        <button class="btn spinner-up">
-                            <i class="icon-chevron-up"></i>
-                        </button>
-                        <button class="btn spinner-down">
-                            <i class="icon-chevron-down"></i>
-                        </button>
-                    </div>
-                </div>        
-            </div>
-        </div>
-        
-        <br />
-        
-        <div class="clearfix">
-        <label>Information to show:</label>
-            <div class="form-control">
-                <label class="checkbox checkbox-custom"><input type="checkbox" id="showName" checked="checked" disabled="disabled"><i class="checkbox"></i>Name</label>
-                <label class="checkbox checkbox-custom"><input type="checkbox" id="showCategory" checked="checked"><i class="checkbox"></i>Category</label>
-                <label class="checkbox checkbox-custom"><input type="checkbox" id="showPhone"><i class="checkbox"></i>Phone</label>
-                <label class="checkbox checkbox-custom"><input type="checkbox" id="showDistance" checked="checked"><i class="checkbox"></i>Distance</label>
+		
+		<br />
+		
+		<div class="clearfix">
+			<div class="form-control">
+				<label for="radius">Radius (meters):</label>
+				<div class="spinner" id="radius">
+					<input type="text" class="input-mini spinner-input">
+					<div class="spinner-buttons	 btn-group btn-group-vertical">
+						<button class="btn spinner-up">
+							<i class="icon-chevron-up"></i>
+						</button>
+						<button class="btn spinner-down">
+							<i class="icon-chevron-down"></i>
+						</button>
+					</div>
+				</div>		  
 			</div>
-            <div class="form-control">
-                <label class="checkbox checkbox-custom"><input type="checkbox" id="showDddress"><i class="checkbox"></i>Address</label>
-                <label class="checkbox checkbox-custom"><input type="checkbox" id="showVerified"><i class="checkbox"></i>Verified Status</label>
-                <label class="checkbox checkbox-custom"><input type="checkbox" id="showCheckins"><i class="checkbox"></i>Checkins</label>
-                <label class="checkbox checkbox-custom"><input type="checkbox" id="showUsers"><i class="checkbox"></i>Users</label>
+	
+			<div class="form-control">
+				<label for="limit">Results to Return:</label>
+				<div class="spinner" id="limit">
+					<input type="text" class="input-mini spinner-input">
+					<div class="spinner-buttons	 btn-group btn-group-vertical">
+						<button class="btn spinner-up">
+							<i class="icon-chevron-up"></i>
+						</button>
+						<button class="btn spinner-down">
+							<i class="icon-chevron-down"></i>
+						</button>
+					</div>
+				</div>		  
 			</div>
-            <div class="form-control">
-                <label class="checkbox checkbox-custom"><input type="checkbox" id="showTips"><i class="checkbox"></i>Tips</label>
-                <label class="checkbox checkbox-custom"><input type="checkbox" id="showUrl"><i class="checkbox"></i>URL</label>
-                <label class="checkbox checkbox-custom"><input type="checkbox" id="showLikes"><i class="checkbox"></i>Likes</label>
-                <label class="checkbox checkbox-custom"><input type="checkbox" id="showSpecials"><i class="checkbox"></i>Specials</label>
+		</div>
+		
+		<br />
+		
+		<div class="clearfix">
+		<label>Information to show:</label>
+			<div class="form-control">
+				<label class="checkbox checkbox-custom"><input type="checkbox" id="showName" checked="checked" disabled="disabled"><i class="checkbox"></i>Name</label>
+				<label class="checkbox checkbox-custom"><input type="checkbox" id="showCategory" checked="checked"><i class="checkbox"></i>Category</label>
+				<label class="checkbox checkbox-custom"><input type="checkbox" id="showPhone"><i class="checkbox"></i>Phone</label>
+				<label class="checkbox checkbox-custom"><input type="checkbox" id="showDistance" checked="checked"><i class="checkbox"></i>Distance</label>
 			</div>
-        </div>
-        
-        <br />
-        
-        <div class="clearfix">
-        	<div class="form-control">
-                <label for="categories">Included Categories:</label>
-                <div id="categories" class="pillbox">
-                    <ul>
-                        <li data-value="4d4b7104d754a06370d81259" class="status-success">Arts &amp; Entertainment</li>
-                        <li data-value="4d4b7105d754a06374d81259" class="status-success">Food</li>
-                        <li data-value="4d4b7105d754a06376d81259" class="status-success">Nightlife Spot</li>
-                        <li data-value="4d4b7105d754a06377d81259" class="status-success">Outdoors &amp; Recreation</li>
-                    </ul>
-                </div>
+			<div class="form-control">
+				<label class="checkbox checkbox-custom"><input type="checkbox" id="showDddress"><i class="checkbox"></i>Address</label>
+				<label class="checkbox checkbox-custom"><input type="checkbox" id="showVerified"><i class="checkbox"></i>Verified Status</label>
+				<label class="checkbox checkbox-custom"><input type="checkbox" id="showCheckins"><i class="checkbox"></i>Checkins</label>
+				<label class="checkbox checkbox-custom"><input type="checkbox" id="showUsers"><i class="checkbox"></i>Users</label>
 			</div>
-        	<div class="form-control">
-                <label for="exCategories">Excluded Categories:</label>
-                <div id="exCategories" class="pillbox">
-                    <ul>
-                        <li data-value="4d4b7105d754a06372d81259">College &amp; University</li>
-                        <li data-value="4d4b7105d754a06375d81259">Professional &amp; Other Places</li>
-                        <li data-value="4e67e38e036454776db1fb3a">Residence</li>
-                        <li data-value="4d4b7105d754a06378d81259">Shop &amp; Service</li>
-                        <li data-value="4d4b7105d754a06379d81259">Travel &amp; Transport</li>
-                    </ul>
-                </div>
+			<div class="form-control">
+				<label class="checkbox checkbox-custom"><input type="checkbox" id="showTips"><i class="checkbox"></i>Tips</label>
+				<label class="checkbox checkbox-custom"><input type="checkbox" id="showUrl"><i class="checkbox"></i>URL</label>
+				<label class="checkbox checkbox-custom"><input type="checkbox" id="showLikes"><i class="checkbox"></i>Likes</label>
+				<label class="checkbox checkbox-custom"><input type="checkbox" id="showSpecials"><i class="checkbox"></i>Specials</label>
 			</div>
-        </div>
-        
-    </div>
+		</div>
+		
+		<br />
+		
+		<div class="clearfix">
+			<div class="form-control">
+				<label for="categories">Included Categories:</label>
+				<div id="categories" class="pillbox">
+					<ul>
+						<li data-value="4d4b7104d754a06370d81259" class="status-success">Arts &amp; Entertainment</li>
+						<li data-value="4d4b7105d754a06374d81259" class="status-success">Food</li>
+						<li data-value="4d4b7105d754a06376d81259" class="status-success">Nightlife Spot</li>
+						<li data-value="4d4b7105d754a06377d81259" class="status-success">Outdoors &amp; Recreation</li>
+					</ul>
+				</div>
+			</div>
+			<div class="form-control">
+				<label for="exCategories">Excluded Categories:</label>
+				<div id="exCategories" class="pillbox">
+					<ul>
+						<li data-value="4d4b7105d754a06372d81259">College &amp; University</li>
+						<li data-value="4d4b7105d754a06375d81259">Professional &amp; Other Places</li>
+						<li data-value="4e67e38e036454776db1fb3a">Residence</li>
+						<li data-value="4d4b7105d754a06378d81259">Shop &amp; Service</li>
+						<li data-value="4d4b7105d754a06379d81259">Travel &amp; Transport</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		
+	</div>
 </script>
 
 </body>
