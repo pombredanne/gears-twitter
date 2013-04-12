@@ -1,0 +1,31 @@
+{
+  "name": "fuelux-gears",
+  "title": "Fuel UX Gears",
+  "version": "0.0.1",
+  "description": "Serves ET gears",
+  "homepage": "https://github.com/ExactTarget/fuelux-gears",
+  "author": {
+	"name": "ExactTarget",
+	"email": "splumlee@exacttarget.com",
+	"url": "http://code.exacttarget.com"
+  },
+  "repository": {
+	"type": "git",
+	"url": "git://github.com/ExactTarget/fuelux-gears.git"
+  },
+  "bugs": {
+	"url": "https://github.com/ExactTarget/fuelux-gears/issues"
+  },
+  "engines": {
+	"node": ">= 0.6.0"
+  },
+  "dependencies": {
+	"express": "~3.0.0rc4"
+  },
+  "private": true,
+  "volo": {
+	"baseDir": "public",
+	"dependencies": {
+	}
+  }
+}
