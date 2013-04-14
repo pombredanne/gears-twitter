@@ -11,15 +11,18 @@
 	<script src="//fuelcdn.com/fuelux/2.2/loader.min.js" type="text/javascript"></script>
 
 	<script type="text/javascript">
+		// store for later
+		var view;
+
 		$(document).ready(function(){
-			
+
 			function getHtmlView(jsonData, showData, content) {
 				content += '<ul class="clearfix">';
-	
+
 				$.each(jsonData.response.venues, function(i,venue){
 					content += '<li>';
 					content += '<strong>Name: </strong><a href="' + venue.canonicalUrl + '">' + venue.name + '</a><br />';
-	
+
 					if (showData.showCategory) {
 						$.each(this.categories, function(i,category){
 							content += '<strong>Category: </strong>' + category.name + '<br />';
@@ -59,22 +62,22 @@
 					if (showData.showSpecials) {
 						content += '<strong>Specials: </strong>' + venue.specials.count + '<br />';
 					}
-					
+
 					content += '</li>';
-				
+
 				});
-				
+
 				content += '</ul>';
-				
+
 				return content;
 			}
-			
+
 			function getTextView(jsonData, showData, content) {
-	
+
 				$.each(jsonData.response.venues, function(i,venue){
 					content += 'Name: ' + venue.name + '\r\n';
 					content += 'Page Url: ' + venue.canonicalUrl + '\r\n';
-	
+
 					if (showData.showCategory) {
 						$.each(this.categories, function(i,category){
 							content += 'Category: ' + category.name + '\r\n';
@@ -114,23 +117,23 @@
 					if (showData.showSpecials) {
 						content += 'Specials: ' + venue.specials.count + '\r\n';
 					}
-					
+
 					content += '\r\n';
-				
+
 				});
-				
+
 				content += '</ul>';
-				
+
 				return content;
 			}
-			
+
 			FUELUX_EDITOR.trigger('fetch');
 
 			FUELUX_EDITOR.trigger('resize', { height: 520, width: 480 });
 
 			FUELUX_EDITOR.on('receive', function(e, details){
 				var gearData = details.gearData;
-				
+
 				$('#lat').val(gearData.lat);
 				$('#lng').val(gearData.lng);
 				$('#radius').spinner('value', gearData.radius);
@@ -144,11 +147,14 @@
 				$('#exCategories').on('click', 'li', function(){
 					$('#categories ul').append('<li data-value="' + $(this).attr('data-value') + '" class="status-success">' + $(this).html() + '</li>');
 				});
-				
+
 				FUELUX_EDITOR.trigger('ready');
 			});
 
 			FUELUX_EDITOR.on('accept', function(e, details){
+
+				// view can be stored from receive event or read now
+				view = ( details && details.viewType && details.viewType.value ? details.viewType.value : view);
 
 				var lat = $('#lat').val(),
 					lng = $('#lng').val(),
@@ -180,24 +186,24 @@
 						exCategories: exCategories,
 						showData: showData
 */					};
-				
+
 				if (categories !== null) {
 					$.each(categories, function( key, value ) {
 						categoryStr += value.value + ',';
 					});
 				}
 
-				
+
 				if ((lat == '') || (lng == '')) {
-					
+
 					content = '<div class="well text-error">Missing or incorrect info.</div>';
-					
+
 					FUELUX_EDITOR.trigger('done', { content: content, gearData: gearData });
 
 				} else {
 					$.getJSON(
-						"https://api.foursquare.com/v2/venues/search?", 
-						{ 
+						"https://api.foursquare.com/v2/venues/search?",
+						{
 							"ll": lat + ',' + lng,
 							"intent": "browse",
 							"radius": radius,
@@ -207,9 +213,16 @@
 							"v": "20121016"
 						},
 						function(jsonData) {
-							content += getHtmlView(jsonData, showData, content);
-							content += getTextView(jsonData, showData, content);
-
+							if (
+								view === 'text/html; kind=viewaswebpage' || view === 'text/html; kind=htmlemailbody') {
+								content = getHtmlView(jsonData, showData, content);
+							} else if (view === 'text/html; kind=forwardtoafriend') {
+								content = getHtmlView(jsonData, showData, content);
+							} else if (view === 'text/plain; kind=textemailbody') {
+								content = getTextView(jsonData, showData, content);
+							} else {
+								content = '<div class="well text-error">Message type not supported.</div>';
+							}
 							FUELUX_EDITOR.trigger('done', { content: content, gearData: gearData });
 						}
 					);
@@ -270,8 +283,8 @@
 	<div id="venues" class="well"></div>
 <script>
 	$.getJSON(
-		"https://api.foursquare.com/v2/venues/search?", 
-		{ 
+		"https://api.foursquare.com/v2/venues/search?",
+		{
 			"ll": '40.725568,-73.997447',
 			"intent": "browse",
 			"radius": '100',
@@ -337,11 +350,11 @@
 				if (showSpecials) {
 					content += '<strong>Specials: </strong>' + venue.specials.count + '<br />';
 				}
-				
+
 				content += '</li>';
-			
+
 			});
-			
+
 			content += '</ul>';
 
 			$('#venues').html(content);
@@ -349,7 +362,7 @@
 	);
 </script>
 	<div class="clearfix">
-	
+
 		<div class="clearfix">
 			<div class="form-control">
 				<label for="lat">Latitude (-90 to 90):</label>
@@ -357,7 +370,7 @@
 					<input id="lat" name="lat" type="text" placeholder="40.725568" class="input-small" />
 					<span class="add-on">&deg;</span>
 				</div>
-			</div>	  
+			</div>
 			<div class="form-control">
 				<label for="lng">Longitude (-180 to 180):</label>
 				<div class="input-append">
@@ -366,9 +379,9 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<br />
-		
+
 		<div class="clearfix">
 			<div class="form-control">
 				<label for="radius">Radius (meters):</label>
@@ -382,9 +395,9 @@
 							<i class="icon-chevron-down"></i>
 						</button>
 					</div>
-				</div>		  
+				</div>
 			</div>
-	
+
 			<div class="form-control">
 				<label for="limit">Results to Return:</label>
 				<div class="spinner" id="limit">
@@ -397,12 +410,12 @@
 							<i class="icon-chevron-down"></i>
 						</button>
 					</div>
-				</div>		  
+				</div>
 			</div>
 		</div>
-		
+
 		<br />
-		
+
 		<div class="clearfix">
 		<label>Information to show:</label>
 			<div class="form-control">
@@ -424,9 +437,9 @@
 				<label class="checkbox checkbox-custom"><input type="checkbox" id="showSpecials"><i class="checkbox"></i>Specials</label>
 			</div>
 		</div>
-		
+
 		<br />
-		
+
 		<div class="clearfix">
 			<div class="form-control">
 				<label for="categories">Included Categories:</label>
@@ -452,7 +465,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 </script>
 
