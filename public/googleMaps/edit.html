@@ -32,11 +32,9 @@
 			FUELUX_EDITOR.trigger('resize', { height: 520, width: 310 });
 
 			FUELUX_EDITOR.on('receive', function(e, details){
-				view = details.viewType.value;
-				
 				var gearData = details.gearData,
-					address;
-
+				view = (details && details.viewType && details.viewType.value ? details.viewType.value : null);
+				
 				$('#mapWidth').spinner('value', gearData.width);
 				$('#mapHeight').spinner('value', gearData.height);
 				$('#mapZoom').spinner('value', gearData.zoom);
@@ -54,7 +52,6 @@
 			});
 
 			FUELUX_EDITOR.on('accept', function(e, details){
-
 				// view can be stored from receive event or read now
 				view = ( details && details.viewType && details.viewType.value ? details.viewType.value : view);
 
@@ -182,3 +179,4 @@
 	</div>
 </body>
 </html>
+

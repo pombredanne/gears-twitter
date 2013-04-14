@@ -133,6 +133,7 @@
 
 			FUELUX_EDITOR.on('receive', function(e, details){
 				var gearData = details.gearData;
+				view = (details && details.viewType && details.viewType.value ? details.viewType.value : null);
 
 				$('#lat').val(gearData.lat);
 				$('#lng').val(gearData.lng);
@@ -471,3 +472,4 @@
 
 </body>
 </html>
+

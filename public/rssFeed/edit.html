@@ -52,7 +52,9 @@
 			FUELUX_EDITOR.trigger('resize', { height: 380, width: 330 });
 
 			FUELUX_EDITOR.on('receive', function(e, details){
+
 				var gearData = details.gearData;
+				view = (details && details.viewType && details.viewType.value ? details.viewType.value : null);
 
 				$('#txtFeedUrl').val(gearData.feedurl);
 				$('#postCount').spinner('value', gearData.postcount);
@@ -162,3 +164,4 @@
 	</div>
 </body>
 </html>
+

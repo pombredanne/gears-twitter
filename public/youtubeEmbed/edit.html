@@ -11,6 +11,9 @@
 	<script src="//fuelcdn.com/fuelux/2.2/loader.min.js" type="text/javascript"></script>
 
 	<script type="text/javascript">
+		// store for later
+		var view;
+
 		$(document).ready(function(){
 			
 			function getWebView(gearData, jsonData) {
@@ -30,10 +33,13 @@
 			FUELUX_EDITOR.trigger('resize', { height: 470, width: 310 });
 
 			FUELUX_EDITOR.on('receive', function(e, details){
+				// view can be stored from receive event or read now
+				view = ( details && details.viewType && details.viewType.value ? details.viewType.value : null);
+
 				var gearData = details.gearData;
 
 				$('#playerHeight').spinner('value', gearData.height);
-				$('#vidId').spinner('value', gearData.vId);
+				$('#vidId').val(gearData.vId);
 				$('#playerWidth').spinner('value', gearData.width);
 
 				FUELUX_EDITOR.trigger('ready');
@@ -44,6 +50,9 @@
 			});
 
 			FUELUX_EDITOR.on('accept', function(e, details){
+				// view can be stored from receive event or read now
+				view = ( details && details.viewType && details.viewType.value ? details.viewType.value : view);
+
 				var vId = $('#vidId').val(),
 					width = $('#playerWidth').spinner('value'),
 					height = $('#playerHeight').spinner('value'),
@@ -64,9 +73,16 @@
 						if(status != 'success') { // json error
 							content += '<div class="well text-error">JSON Error</div>';
 						} else {
-							content += getWebView(gearData, jsonData);
-							content += getHtmlView(gearData, jsonData);
-							content += getTextView(gearData, jsonData);
+							if (
+								view === 'text/html; kind=viewaswebpage' || view === 'text/html; kind=htmlemailbody') {
+								content = getHtmlView(gearData, jsonData);
+							} else if (view === 'text/html; kind=forwardtoafriend') {
+								content = getHtmlView(gearData, jsonData);
+							} else if (view === 'text/plain; kind=textemailbody') {
+								content = getTextView(gearData, jsonData);
+							} else {
+								content = '<div class="well text-error">Message type not supported.</div>';
+							}
 						}
 
 						FUELUX_EDITOR.trigger('done', { content: content, gearData: gearData });
@@ -140,3 +156,4 @@
 	</div>
 </body>
 </html>
+
