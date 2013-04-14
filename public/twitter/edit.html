@@ -125,11 +125,11 @@
 						} else {
 							if (
 								view === 'text/html; kind=viewaswebpage' || view === 'text/html; kind=htmlemailbody') {
-								content += getHtmlView(gearData, jsonData);
+								content = getHtmlView(gearData, jsonData);
 							} else if (view === 'text/html; kind=forwardtoafriend') {
 								content = getHtmlView(gearData, jsonData);
 							} else if (view === 'text/plain; kind=textemailbody') {
-								content += getTextView(gearData, jsonData);
+								content = getTextView(gearData, jsonData);
 							} else {
 								content = '<div class="well text-error">Message type not supported.</div>';
 							}
@@ -161,3 +161,4 @@
 	</div>
 </body>
 </html>
+
