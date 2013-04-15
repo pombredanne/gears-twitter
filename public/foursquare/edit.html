@@ -140,10 +140,10 @@
 				var jqExCategories = $('#exCategories ul');
 
 				$.each(categories, function(index, element) {
-					jqCategories.append('<li data-value' + categories[index].value + '>' + categories[index].text + '</li>');
+					jqCategories.append('<li data-value="' + categories[index].value + '">' + categories[index].text + '</li>');
 				})
 				$.each(jqExCategories, function(index, element) {
-					jqExCategories.append('<li data-value' + categories[index].value + '>' + categories[index].text + '</li>');
+					jqExCategories.append('<li data-value="' + categories[index].value + '>"' + categories[index].text + '</li>');
 				});
 
 				$.each(showData, function(index, element) {
@@ -410,3 +410,4 @@
 
 </body>
 </html>
+
