@@ -133,7 +133,7 @@
 			FUELUX_EDITOR.on('receive', function(e, details){
 				var gearData = details.gearData;
 				var categories = gearData.categories || [{"text":"Arts & Entertainment","value":"4d4b7104d754a06370d81259"},{"text":"Food","value":"4d4b7105d754a06374d81259"},{"text":"Nightlife Spot","value":"4d4b7105d754a06376d81259"},{"text":"Outdoors & Recreation","value":"4d4b7105d754a06377d81259"}];
-				var categoriesEx = gearData.exCategories || [{"text":"College & University","value":"4d4b7105d754a06372d81259"},{"text":"Professional & Other Places","value":"4d4b7105d754a06375d81259"},{"text":"Residence","value":"4e67e38e036454776db1fb3a"},{"text":"Shop & Service","value":"4d4b7105d754a06378d81259"},{"text":"Travel & Transport","value":"4d4b7105d754a06379d81259"}];
+				var exCategories = gearData.exCategories || [{"text":"College & University","value":"4d4b7105d754a06372d81259"},{"text":"Professional & Other Places","value":"4d4b7105d754a06375d81259"},{"text":"Residence","value":"4e67e38e036454776db1fb3a"},{"text":"Shop & Service","value":"4d4b7105d754a06378d81259"},{"text":"Travel & Transport","value":"4d4b7105d754a06379d81259"}];
 				var showData = gearData.showData || {"showCategory":true,"showPhone":false,"showDistance":true,"showAddress":false,"showVerified":false,"showCheckins":false,"showUsers":false,"showTips":false,"showUrl":false,"showLikes":false,"showSpecials":false};
 
 				var jqCategories = $('#categories ul');
@@ -142,8 +142,8 @@
 				$.each(categories, function(index, element) {
 					jqCategories.append('<li data-value="' + categories[index].value + '">' + categories[index].text + '</li>');
 				})
-				$.each(jqExCategories, function(index, element) {
-					jqExCategories.append('<li data-value="' + categories[index].value + '>"' + categories[index].text + '</li>');
+				$.each(exCategories, function(index, element) {
+					jqExCategories.append('<li data-value="' + exCategories[index].value + '">' + exCategories[index].text + '</li>');
 				});
 
 				$.each(showData, function(index, element) {
@@ -410,4 +410,5 @@
 
 </body>
 </html>
+
 
