@@ -216,7 +216,7 @@
 						function(jsonData) {
 							if (jsonData && jsonData.response && jsonData.response.venues) {
 								if (jsonData.response.venues.length === 0) {
-									content = '<p>No venues found for your criteria. Please edit your search and try again.</p>';
+									content = 'No venues found for your criteria. Please edit your search and try again.';
 								} else {
 									if (
 										view === 'text/html; kind=viewaswebpage' || view === 'text/html; kind=htmlemailbody') {
@@ -233,7 +233,7 @@
 
 							} else {
 								// API fail
-								content = '<p>Error getting data back from Foursquare. Please try again.</p>';
+								content = 'Error getting data back from Foursquare. Please try again.';
 							}
 
 							FUELUX_EDITOR.trigger('done', { content: content, gearData: gearData });

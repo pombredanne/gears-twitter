@@ -1,3 +1,6 @@
+# ALL
+correct 0 result set for text entries vs html entries
+
 # Maps
 controls on map
 preview on enter
@@ -5,3 +8,6 @@ size of embedding
 
 # Foursquare
 selection of categories for include, exclude
+
+# RSS feed
+validation before save

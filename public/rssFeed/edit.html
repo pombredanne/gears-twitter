@@ -49,7 +49,7 @@
 
 			FUELUX_EDITOR.trigger('fetch');
 
-			FUELUX_EDITOR.trigger('resize', { height: 380, width: 330 });
+			FUELUX_EDITOR.trigger('resize', { height: 230, width: 330 });
 
 			FUELUX_EDITOR.on('receive', function(e, details){
 
@@ -85,6 +85,7 @@
 					//Test the the URL given returns a valid feed
 					$.getJSON(document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num='+ postcount +'&callback=?&q=' + encodeURIComponent(feedurl),{},function(jsonData){
 
+
 						if (jsonData.responseData == null) {
 
 							content = '<div class="well text-error">JSON Error</div>';
@@ -92,16 +93,24 @@
 							FUELUX_EDITOR.trigger('done', { content: content, gearData: gearData });
 
 						} else {
-							if (
-								view === 'text/html; kind=viewaswebpage' || view === 'text/html; kind=htmlemailbody') {
-								content = getHtmlView(jsonData);
-							} else if (view === 'text/html; kind=forwardtoafriend') {
-								content = getHtmlView(jsonData);
-							} else if (view === 'text/plain; kind=textemailbody') {
-								content = getTextView(jsonData);
+							if (jsonData && jsonData.responseData && jsonData.responseData.feed && jsonData.responseData.feed.entries) {
+								if (jsonData.responseData.feed.entries.length === 0) {
+									content = 'No entries currently.';
+								} else {
+									if (
+										view === 'text/html; kind=viewaswebpage' || view === 'text/html; kind=htmlemailbody') {
+										content = getHtmlView(jsonData);
+									} else if (view === 'text/html; kind=forwardtoafriend') {
+										content = getHtmlView(jsonData);
+									} else if (view === 'text/plain; kind=textemailbody') {
+										content = getTextView(jsonData);
+									} else {
+										content = '<div class="well text-error">Message type not supported.</div>';
+									} // 
+								} // 0 check
 							} else {
-								content = '<div class="well text-error">Message type not supported.</div>';
-							}
+								content = 'Error getting data from feed URL.';
+							} // object checks
 
 							FUELUX_EDITOR.trigger('done', { content: content, gearData: gearData });
 						}
@@ -127,23 +136,6 @@
 <body>
 	<h1>RSS Feed</h1>
 	<p>Create the following embedded RSS feed by completing the form.</p>
-	<div id="gearRecentBlogPosts" class="well">
-		<img style="margin:8px auto 8px auto; display:block;" width="43" height="11" title="" alt="Loading&#8230;" src="data:image/gif;base64,R0lGODlhKwALAPEAAP///8zMzOXl5czMzCH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAKwALAAACMoSOCMuW2diD88UKG95W88uF4DaGWFmhZid93pq+pwxnLUnXh8ou+sSz+T64oCAyTBUAACH5BAkKAAAALAAAAAArAAsAAAI9xI4IyyAPYWOxmoTHrHzzmGHe94xkmJifyqFKQ0pwLLgHa82xrekkDrIBZRQab1jyfY7KTtPimixiUsevAAAh+QQJCgAAACwAAAAAKwALAAACPYSOCMswD2FjqZpqW9xv4g8KE7d54XmMpNSgqLoOpgvC60xjNonnyc7p+VKamKw1zDCMR8rp8pksYlKorgAAIfkECQoAAAAsAAAAACsACwAAAkCEjgjLltnYmJS6Bxt+sfq5ZUyoNJ9HHlEqdCfFrqn7DrE2m7Wdj/2y45FkQ13t5itKdshFExC8YCLOEBX6AhQAADsAAAAAAAAAAAA=" />
-	</div>
-	<script>
-		(function() {
-			jQuery.getJSON(document.location.protocol + "//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num="+ 3 +"&callback=?&q=" + encodeURIComponent("http://googleblog.blogspot.com/feeds/posts/default"),{},
-				function(data) {
-					content = "<ul>";
-					jQuery.each(data.responseData.feed.entries,function(key,val){
-						content += "<li><a href="+val.link+">"+val.title+"</a></li>";
-					});
-					content += "</ul>";
-					jQuery("#gearRecentBlogPosts").html(content);
-				}
-			);
-		})();
-	</script>
 	<div>
 		<label for="txtFeedUrl">RSS Feed URL:</label>
 		<input id="txtFeedUrl" name="FeedURL" type="text" class="input-xlarge" placeholder="http://googleblog.blogspot.com/feeds/posts/default" />
@@ -164,4 +156,3 @@
 	</div>
 </body>
 </html>
-
