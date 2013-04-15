@@ -24,8 +24,8 @@
   },
   "private": true,
   "volo": {
-	"baseDir": "public",
+	"baseDir": "public/vendor",
 	"dependencies": {
-	}
+	 }
   }
 }

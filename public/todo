@@ -8,6 +8,8 @@ size of embedding
 
 # Foursquare
 selection of categories for include, exclude
+inputs for criteria
+validation on lat/long
 
 # RSS feed
 validation before save
