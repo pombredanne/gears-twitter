@@ -32,9 +32,11 @@
 			FUELUX_EDITOR.trigger('resize', { height: 520, width: 310 });
 
 			FUELUX_EDITOR.on('receive', function(e, details){
-				var gearData = details.gearData,
+				var address = '',
+					gearData = details.gearData;
+
 				view = (details && details.viewType && details.viewType.value ? details.viewType.value : null);
-				
+
 				$('#mapWidth').spinner('value', gearData.width);
 				$('#mapHeight').spinner('value', gearData.height);
 				$('#mapZoom').spinner('value', gearData.zoom);
@@ -179,4 +181,3 @@
 	</div>
 </body>
 </html>
-
