@@ -1,15 +1,20 @@
 # ALL
 correct 0 result set for text entries vs html entries
+live update via the update event
 
-# Maps
+# Google Maps
 controls on map
-preview on enter
 size of embedding
 
 # Foursquare
-selection of categories for include, exclude
-inputs for criteria
 validation on lat/long
 
 # RSS feed
 validation before save
+
+# Twitter
+handle API limit
+options for further content
+
+# Youtube
+controls on video
