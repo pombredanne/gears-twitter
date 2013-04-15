@@ -30,7 +30,7 @@
 			
 			FUELUX_EDITOR.trigger('fetch');
 
-			FUELUX_EDITOR.trigger('resize', { height: 470, width: 310 });
+			FUELUX_EDITOR.trigger('resize', { height: 240, width: 310 });
 
 			FUELUX_EDITOR.on('receive', function(e, details){
 				// view can be stored from receive event or read now
@@ -115,9 +115,9 @@
 </head>
 <body>
 	<h1>YouTube Video</h1>
-	<p>Create the following embedded YouTube video by completing the form.</p>
-	<iframe width="267" height="200" src="http://www.youtube.com/embed/_YUugB4IUl4" frameborder="0" allowfullscreen></iframe>
-	<br /><br />
+	<p>Create an embedded YouTube video by completing the form.</p>
+	<!-- <iframe width="267" height="200" src="http://www.youtube.com/embed/_YUugB4IUl4" frameborder="0" allowfullscreen></iframe> -->
+	<!-- <br /><br /> -->
 	<div class="clearfix">
 		<label>Video ID: </label><input type="text" id="vidId" placeholder="_YUugB4IUl4" />
 		
@@ -156,4 +156,6 @@
 	</div>
 </body>
 </html>
+
+
 
