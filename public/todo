@@ -1,13 +1,13 @@
 # ALL
 correct 0 result set for text entries vs html entries
 live update via the update event
+validation of form fields/error messaging when missing required fields
 
 # Google Maps
 controls on map
 size of embedding
 
 # Foursquare
-validation on lat/long
 
 # RSS feed
 validation before save
