@@ -1,31 +1,74 @@
 {
-  "name": "fuelux-gears",
-  "title": "Fuel UX Gears",
-  "version": "0.0.1",
-  "description": "Serves ET gears",
-  "homepage": "https://github.com/ExactTarget/fuelux-gears",
-  "author": {
-	"name": "ExactTarget",
-	"email": "splumlee@exacttarget.com",
-	"url": "http://code.exacttarget.com"
-  },
-  "repository": {
-	"type": "git",
-	"url": "git://github.com/ExactTarget/fuelux-gears.git"
-  },
-  "bugs": {
-	"url": "https://github.com/ExactTarget/fuelux-gears/issues"
-  },
-  "engines": {
-	"node": ">= 0.6.0"
-  },
-  "dependencies": {
-	"express": "~3.0.0rc4"
-  },
-  "private": true,
-  "volo": {
-	"baseDir": "public/vendor",
+	"name": "fuelux-gears",
+	"description": "Official ET Gears",
+	"version": "0.1.0",
+	"homepage": "https://github.com/ExactTarget/fuelux-gears",
+	"author": {
+		"name": "Scott Plumlee",
+		"email": "splumlee@exacttarget.com",
+		"url": "http://code.exacttarget.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/ExactTarget/fuelux-gears.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ExactTarget/fuelux-gears/issues"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://github.com/ExactTarget/fuelux-gears/blob/master/LICENSE-MIT"
+		}
+	],
+	"main": "app",
+	"engines": {
+		"node": ">= 0.8.14"
+	},
+	"scripts": {
+		"test": "grunt nodeunit"
+	},
 	"dependencies": {
-	 }
-  }
+		"config": "0.4.20",
+		"express": "3.0.0rc4",
+		"hbs": "~1.0.5",
+		"http-proxy": "0.8.7",
+		"jwt-simple": "0.1.0",
+		"moment": "1.7.2",
+		"mongoose": "3.6.4",
+		"request": "2.12.0",
+		"underscore": "1.4.3"
+	},
+	"devDependencies": {
+		"grunt": "~0.4.1",
+		"grunt-contrib-clean": "~0.4.0",
+		"grunt-contrib-concat": "~0.1.3",
+		"grunt-contrib-handlebars": "~0.5.8",
+		"grunt-contrib-htmlmin": "~0.1.1",
+		"grunt-contrib-imagemin": "~0.1.2",
+		"grunt-contrib-jshint": "~0.3.0",
+		"grunt-contrib-livereload": "~0.1.2",
+		"grunt-contrib-nodeunit": "~0.1.2",
+		"grunt-contrib-requirejs": "~0.4.0",
+		"grunt-contrib-uglify": "~0.2.0",
+		"grunt-contrib-watch": "~0.3.1",
+		"grunt-express": "~0.3.2",
+		"grunt-mocha": "~0.3.0",
+		"grunt-open": "~0.2.0",
+		"grunt-recess": "~0.3.1",
+		"matchdep": "~0.1.1"
+	},
+	"keywords": [],
+	"volo": {
+		"baseDir": "public/vendor",
+		"dependencies": {
+			"backbone": "github:documentcloud/backbone/1.0.0",
+			"fuelux": "github:ExactTarget/fuelux/2.3.0",
+			"jquery": "github:jquery/jquery/1.9.1",
+			"require": "github:jrburke/requirejs/2.1.5",
+			"underscore": "github:documentcloud/underscore/1.4.4"
+		}
+	},
+	"css_prefix": "fueluxgears",
+	"app_display_name": "FuelUX Gears"
 }
