@@ -19,7 +19,7 @@ module.exports = function( grunt ) {
 			foursquare: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'public/foursquare/edit.html',
+				dest: 'dist/public/foursquare/edit.html',
 				variables: function () {
 					return {
 						body: grunt.file.read('src/foursquare/edit-body.html'),
@@ -32,7 +32,7 @@ module.exports = function( grunt ) {
 			googleMaps: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'public/googleMaps/edit.html',
+				dest: 'dist/public/googleMaps/edit.html',
 				variables: function () {
 					return {
 						body: grunt.file.read('src/googleMaps/edit-body.html'),
@@ -45,7 +45,7 @@ module.exports = function( grunt ) {
 			rssFeed: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'public/rssFeed/edit.html',
+				dest: 'dist/public/rssFeed/edit.html',
 				variables: function () {
 					return {
 						body: grunt.file.read('src/rssFeed/edit-body.html'),
@@ -58,7 +58,7 @@ module.exports = function( grunt ) {
 			twitter: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'public/twitter/edit.html',
+				dest: 'dist/public/twitter/edit.html',
 				variables: function () {
 					return {
 						body: grunt.file.read('src/twitter/edit-body.html'),
@@ -71,7 +71,7 @@ module.exports = function( grunt ) {
 			youtubeEmbed: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'public/youtubeEmbed/edit.html',
+				dest: 'dist/public/youtubeEmbed/edit.html',
 				variables: function () {
 					return {
 						body: grunt.file.read('src/youtubeEmbed/edit-body.html'),
@@ -80,12 +80,6 @@ module.exports = function( grunt ) {
 						title: 'YouTube Embedded Video'
 					};
 				}
-			}
-		},
-		watch: {
-			reload: {
-				files: '<config:jshint.all_files>',
-				tasks: 'reload csslint jshint compileGears'
 			}
 		},
 		csslint: {
@@ -104,11 +98,35 @@ module.exports = function( grunt ) {
 			]
 		},
 		copy: {
-			main: {
+			vendor: {
 				files: [
 					{
 						src: ['vendor/**'],
 						dest: 'dist/public/'
+					}
+				]
+			},
+			main: {
+				files: [
+					{
+						src: ['src/foursquare/config.js'],
+						dest: 'dist/public/foursquare/config.js'
+					},
+					{
+						src: ['src/googleMaps/config.js'],
+						dest: 'dist/public/googleMaps/config.js'
+					},
+					{
+						src: ['src/rssFeed/config.js'],
+						dest: 'dist/public/rssFeed/config.js'
+					},
+					{
+						src: ['src/twitter/config.js'],
+						dest: 'dist/public/twitter/config.js'
+					},
+					{
+						src: ['src/youtubeEmbed/config.js'],
+						dest: 'dist/public/youtubeEmbed/config.js'
 					}
 				]
 			}
@@ -120,8 +138,7 @@ module.exports = function( grunt ) {
 		'csslint',
 		'jshint',
 		'compileGears',
-		'vendorCopy',
-		'watch'
+		'copy:main'
 	]);
 
 	grunt.registerTask( 'compileGears', [
@@ -129,7 +146,7 @@ module.exports = function( grunt ) {
 	]);
 
 	grunt.registerTask( 'vendorCopy', [
-		'copy'
+		'copy:vendor'
 	]);
 
 	grunt.registerTask( 'test', [

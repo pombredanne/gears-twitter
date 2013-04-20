@@ -3,7 +3,7 @@
 #############################
 /public-optimized
 optimized
-/dist/public/vendor
+/dist/public/
 
 #############################
 # Node.js
