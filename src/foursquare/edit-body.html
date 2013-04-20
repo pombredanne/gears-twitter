@@ -1,0 +1,101 @@
+<h1>Foursquare Venues <img width="16" height="16" title="" alt="Foursquare logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYxIDY0LjE0MDk0OSwgMjAxMC8xMi8wNy0xMDo1NzowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpFMUZERDM1RTJGMjA2ODExODcxRkRFMTRBRTU5QjE4MCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpFMTY3QzREQkYzMEUxMUUwQTA4Q0U3MTMyQjdENjYxNSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpFMTY3QzREQUYzMEUxMUUwQTA4Q0U3MTMyQjdENjYxNSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1LjEgTWFjaW50b3NoIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RTNGREQzNUUyRjIwNjgxMTg3MUZERTE0QUU1OUIxODAiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RTFGREQzNUUyRjIwNjgxMTg3MUZERTE0QUU1OUIxODAiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6TrkzZAAABWUlEQVR42oyTz0cEcRiHZyvRHxDRKTYdEkU6RZRYYrNdSpG6RNGlRJ06FunUiiJ1KbZDQ6SU0rWlS9EpIiIiIiJSz5fPy2vsrl4e874z836+8/6YVHR4F5WxadiUPwjHpV6qcn49ZF3c7vwuXXOw75/VuORLaIMYLhJio1AtgTU4h3E4S6mEKdiKKtsHdMIjdMMuNFsJO3BVIfkbhpRs/TnwPfhxTfqCh4TAjDtgERpg2QSGYQMWJDQCHbCnhFV9oTVxBZpUci704Ned9Aqt8K44iBfcJK6hrtwYI33aDaQVW3IjHCWTTWAMtuFF99IS6VEckk4lYvYE+dDYlNvEOVhPdH4J+iGTOHjSemQlhCUZSLxUK8FMibHmkj2YgN7o/5Y1ERMIO3Dv/HlNxOwZZsPqKi7aXti/8AZ9WtFY91q04jaNvAijPYFPL2AisYtvnV90fsHX8ifAAPxASeY8tjn+AAAAAElFTkSuQmCC" title="Powered by Foursquare" />
+</h1>
+<p>Create the following embedded Foursquare venues list by completing the form.</p>
+
+<div class="clearfix">
+
+	<div class="clearfix">
+		<div class="form-control">
+			<label for="lat">Latitude (-90 to 90):</label>
+			<div class="input-append">
+				<input id="lat" name="lat" type="text" placeholder="40.725568" class="input-small" />
+				<span class="add-on">&deg;</span>
+			</div>
+		</div>
+		<div class="form-control">
+			<label for="lng">Longitude (-180 to 180):</label>
+			<div class="input-append">
+				<input id="lng" name="lng" type="text" placeholder="-73.997447" class="input-small" />
+				<span class="add-on">&deg;</span>
+			</div>
+		</div>
+	</div>
+
+	<br />
+
+	<div class="clearfix">
+		<div class="form-control">
+			<label for="radius">Radius (meters):</label>
+			<div class="spinner" id="radius">
+				<input type="text" class="input-mini spinner-input">
+				<div class="spinner-buttons	 btn-group btn-group-vertical">
+					<button class="btn spinner-up">
+						<i class="icon-chevron-up"></i>
+					</button>
+					<button class="btn spinner-down">
+						<i class="icon-chevron-down"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-control">
+			<label for="limit">Results to Return:</label>
+			<div class="spinner" id="limit">
+				<input type="text" class="input-mini spinner-input">
+				<div class="spinner-buttons	 btn-group btn-group-vertical">
+					<button class="btn spinner-up">
+						<i class="icon-chevron-up"></i>
+					</button>
+					<button class="btn spinner-down">
+						<i class="icon-chevron-down"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<br />
+
+	<div class="clearfix">
+		<label>Information to show:</label>
+		<div class="form-control">
+			<label class="checkbox checkbox-custom"><input type="checkbox" id="showName" checked="checked" disabled="disabled"><i class="checkbox"></i>Name</label>
+			<label class="checkbox checkbox-custom"><input type="checkbox" id="showCategory" checked="checked"><i class="checkbox"></i>Category</label>
+			<label class="checkbox checkbox-custom"><input type="checkbox" id="showPhone"><i class="checkbox"></i>Phone</label>
+			<label class="checkbox checkbox-custom"><input type="checkbox" id="showDistance" checked="checked"><i class="checkbox"></i>Distance</label>
+		</div>
+		<div class="form-control">
+			<label class="checkbox checkbox-custom"><input type="checkbox" id="showDddress"><i class="checkbox"></i>Address</label>
+			<label class="checkbox checkbox-custom"><input type="checkbox" id="showVerified"><i class="checkbox"></i>Verified Status</label>
+			<label class="checkbox checkbox-custom"><input type="checkbox" id="showCheckins"><i class="checkbox"></i>Checkins</label>
+			<label class="checkbox checkbox-custom"><input type="checkbox" id="showUsers"><i class="checkbox"></i>Users</label>
+		</div>
+		<div class="form-control">
+			<label class="checkbox checkbox-custom"><input type="checkbox" id="showTips"><i class="checkbox"></i>Tips</label>
+			<label class="checkbox checkbox-custom"><input type="checkbox" id="showUrl"><i class="checkbox"></i>URL</label>
+			<label class="checkbox checkbox-custom"><input type="checkbox" id="showLikes"><i class="checkbox"></i>Likes</label>
+			<label class="checkbox checkbox-custom"><input type="checkbox" id="showSpecials"><i class="checkbox"></i>Specials</label>
+		</div>
+	</div>
+
+	<br />
+
+	<div class="clearfix">
+		<div class="form-control">
+			<label for="categories">Included Categories:</label>
+			<div id="categories" class="pillbox">
+				<ul>
+				</ul>
+			</div>
+		</div>
+		<div class="form-control">
+			<label for="exCategories">Excluded Categories:</label>
+			<div id="exCategories" class="pillbox">
+				<ul>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
