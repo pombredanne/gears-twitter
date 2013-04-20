@@ -3,6 +3,7 @@
 #############################
 /public-optimized
 optimized
+/dist
 
 #############################
 # Node.js
