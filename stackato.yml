@@ -5,6 +5,3 @@ framework:
   runtime: node08
 mem: 128
 ignores: ['.git', 'node_modules', 'Gruntfile.js']
-hooks:
-	pre-staging:
-	- npm config set production true
