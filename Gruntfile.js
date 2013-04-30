@@ -42,15 +42,15 @@ module.exports = function( grunt ) {
 					};
 				}
 			},
-			googleMapsAutoUpdate: {
+			googleMapsButtons: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'dist/public/googleMapsAutoUpdate/edit.html',
+				dest: 'dist/public/googleMapsButtons/edit.html',
 				variables: function () {
 					return {
-						body: grunt.file.read('src/googleMapsAutoUpdate/edit-body.html'),
-						script: grunt.file.read('src/googleMapsAutoUpdate/edit-script.js'),
-						style: grunt.file.read('src/googleMapsAutoUpdate/edit-style.css'),
+						body: grunt.file.read('src/googleMapsButtons/edit-body.html'),
+						script: grunt.file.read('src/googleMapsButtons/edit-script.js'),
+						style: grunt.file.read('src/googleMapsButtons/edit-style.css'),
 						title: 'Google Maps'
 					};
 				}
@@ -156,8 +156,8 @@ module.exports = function( grunt ) {
 						dest: 'dist/public/googleMaps/config.js'
 					},
 					{
-						src: ['src/googleMapsAutoUpdate/config.js'],
-						dest: 'dist/public/googleMapsAutoUpdate/config.js'
+						src: ['src/googleMapsButtons/config.js'],
+						dest: 'dist/public/googleMapsButtons/config.js'
 					},
 					{
 						src: ['src/googleMapsStealth/config.js'],
