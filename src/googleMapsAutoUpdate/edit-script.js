@@ -217,7 +217,7 @@ $(document).ready(function(){
 			content = getContent(view, gearData);
 		}
 		return { content: content, gearData: gearData };
-	};
+	}
 
 	// autoupdate
 	function updateEditor() {
