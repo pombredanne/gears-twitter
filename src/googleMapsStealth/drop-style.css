@@ -1,0 +1,7 @@
+.fuelux body {
+	padding: 20px;
+	background: #f3f3f3;
+}
+.fuelux .form-control {
+	float: left;
+}
