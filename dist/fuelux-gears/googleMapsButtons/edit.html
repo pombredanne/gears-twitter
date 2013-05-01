@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="fuelux">
+<head>
+	<meta charset="UTF-8">
+
+	<title>Gear: Google Maps</title>
+
+	<link href="../fuelux-imhtheme/css/fuelux.min.css" rel="stylesheet">
+
+	<script src="../jquery.min.js" type="text/javascript"></script>
+	<script src="../underscore.js" type="text/javascript"></script>
+	<script src="//internalcdn..com/fuelux-gearapi/0.0.18/gear.min.js" type="text/javascript"></script>
+	<script src="//fuelcdn.com/fuelux-imh/2.2.1/loader.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		/*global $, FUELUX_EDITOR */
+$(document).ready(function(){
+	// store for later
+	var view;
+
+	var origDetails;
+
+	// interactive map
+	function getWebView(gearData) {
+		return '<iframe width="'+ gearData.width +'" height="'+ gearData.height +'" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q='+ gearData.urlAddress +'&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?q='+ gearData.urlAddress +'" target="_blank" style="color:#0000FF;text-align:left">View Larger Map</a></small>';
+	}
+
+	// static map, no controls, image only, zoomable
+	function getHtmlView(gearData) {
+		return '<a href="https://maps.google.com/maps?q='+ gearData.urlAddress +'" target="_blank"><img src="http://maps.googleapis.com/maps/api/staticmap?center=' + gearData.urlAddress + '&markers=' + gearData.urlAddress + '&zoom=' + gearData.zoom + '&size=' + gearData.width + 'x' + gearData.height + '&sensor=false"' + ' /></a>';
+	}
+
+	function getTextView(gearData) {
+		return gearData.address + ': https://maps.google.com/maps?q=' + gearData.urlAddress;
+	}
+
+	// what content to message back to the editor
+	function getContent(view, gearData) {
+		var content;
+		if (
+			view === 'text/html; kind=viewaswebpage' || view === 'text/html; kind=htmlemailbody') {
+			content = getWebView(gearData);
+		} else if (view === 'text/html; kind=forwardtoafriend') {
+			content = getHtmlView(gearData);
+		} else if (view === 'text/plain; kind=textemailbody') {
+			content = getTextView(gearData);
+		} else {
+			content = '<div class="well text-error">Message type not supported.</div>';
+		}
+		return content;
+	}
+
+	function getDataForEditor(view) {
+		var address = $('#mapAddress').val(),
+			urlAddress = address.replace(/\s/g, "+"),
+			width = $('#mapWidth').spinner('value'),
+			height = $('#mapHeight').spinner('value'),
+			zoom = $('#mapZoom').spinner('value'),
+			content = '',
+			gearData = {
+				address: address,
+				urlAddress: urlAddress,
+				width: width,
+				height: height,
+				zoom: zoom
+			};
+		if ((address === '') || (width === '') || (height === '') || (zoom === '')) {
+			// validation here instead of allowing messaging to continue
+			content = '<div class="well text-error">Please verify that you have supplied an address, width, height, and/or zoom.</div>';
+			return false;
+		} else {
+			content = getContent(view, gearData);
+		}
+		return { content: content, gearData: gearData };
+	}
+
+	FUELUX_EDITOR.trigger('fetch');
+
+	FUELUX_EDITOR.trigger('resize', { height: 258, width: 310 });
+
+	FUELUX_EDITOR.on('receive', function(e, details){
+		var gearData = details.gearData;
+		origDetails = details;
+
+		view = (details && details.viewType && details.viewType.value ? details.viewType.value : null);
+
+		if (gearData.address && gearData.width && gearData.height && gearData.zoom) {
+			$('#mapWidth').spinner('value', gearData.width);
+			$('#mapHeight').spinner('value', gearData.height);
+			$('#mapZoom').spinner('value', gearData.zoom);
+			$('#mapAddress').val(gearData.address);
+		} else {
+			// geolocation here?
+		}
+
+		FUELUX_EDITOR.trigger('ready');
+	});
+
+	FUELUX_EDITOR.on('cancel', function(e, details){
+		FUELUX_EDITOR.trigger('done', { content: details.content, gearData: details.gearData });
+	});
+
+	FUELUX_EDITOR.on('accept', function(e, details){
+		// view can be stored from receive event or read now
+		view = ( details && details.viewType && details.viewType.value ? details.viewType.value : view);
+		FUELUX_EDITOR.trigger('done', getDataForEditor(view));
+	});
+
+	// click handlers for accept/cancel buttons
+	$('.editor-dialog-cancel').on('click', function(e) {
+		e.preventDefault();
+		FUELUX_EDITOR.trigger('done', { content: origDetails.content, gearData: origDetails.gearData });
+	});
+
+	$('.editor-dialog-accept').on('click', function(e) {
+		e.preventDefault();
+		FUELUX_EDITOR.trigger('done', getDataForEditor(view));
+	});
+
+	// create spinners on page
+	$('#mapWidth').spinner({
+		'value': 267,
+		'min': 200,
+		'speed': 'fast',
+		'step': 10
+	});
+	$('#mapHeight').spinner({
+		'value': 200,
+		'min': 200,
+		'speed': 'fast',
+		'step': 10
+	});
+
+	$('#mapZoom').spinner({
+		'value': 12,
+		'min': 0,
+		'max': 21,
+		'speed': 'slow',
+		'step': 1
+	});
+
+});
+
+	</script>
+	<style>
+		.fuelux body {
+	padding: 20px;
+	background: #f3f3f3;
+}
+.fuelux .form-control {
+	float: left;
+}
+
+	</style>
+</head>
+<body>
+<h1>Google Map Buttons</h1>
+<p>Create an embedded Google Map by completing the form.</p>
+<div class="clearfix">
+	<label>Address:</label> <textarea id="mapAddress" name="address" placeholder="Business, Street, City, State, Zip"></textarea>
+
+	<div>
+		<div class="form-control">
+			<label>Width:</label>
+			<div class="spinner" id="mapWidth">
+				<input type="text" class="input-mini spinner-input">
+				<div class="spinner-buttons	 btn-group btn-group-vertical">
+					<button class="btn spinner-up">
+						<i class="icon-chevron-up"></i>
+					</button>
+					<button class="btn spinner-down">
+						<i class="icon-chevron-down"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-control">
+			<label>Height:</label>
+			<div class="spinner" id="mapHeight">
+				<input type="text" class="input-mini spinner-input">
+				<div class="spinner-buttons	 btn-group btn-group-vertical">
+					<button class="btn spinner-up">
+						<i class="icon-chevron-up"></i>
+					</button>
+					<button class="btn spinner-down">
+						<i class="icon-chevron-down"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-control">
+			<label>Zoom:</label>
+			<div class="spinner" id="mapZoom">
+				<input type="text" class="input-mini spinner-input">
+				<div class="spinner-buttons	 btn-group btn-group-vertical">
+					<button class="btn spinner-up">
+						<i class="icon-chevron-up"></i>
+					</button>
+					<button class="btn spinner-down">
+						<i class="icon-chevron-down"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+<div class="pull-right">
+	<a href="" class="btn editor-dialog-cancel">Cancel</a>	<a href="" class="btn btn-primary editor-dialog-accept">Accept</a>
+
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
