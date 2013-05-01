@@ -59,7 +59,7 @@
 	  "jquery": "github:jquery/jquery/1.9.1",
 	  "underscore": "github:documentcloud/underscore/1.4.4"
 	},
-	  "url": "https://github.com/ExactTarget/fuelux-gears/dist/fuelux-gears.zip"
+	  "url": "https://github.com/ExactTarget/fuelux-gears/raw/master/dist/fuelux-gears.zip"
   },
   "css_prefix": "fueluxgears",
   "app_display_name": "FuelUX Gears"
