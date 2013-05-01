@@ -54,7 +54,7 @@
 		"baseDir": "lib",
 		"dependencies": {
 		},
-		"url": "https://github.com/ExactTarget/fuelux-gears/{version}/dist/fuelux-gears/",
+		"url": "https://github.com/ExactTarget/fuelux-gears/{version}/dist/fuelux-gears.zip",
 		"type": "directory"
 	},
 	"css_prefix": "fueluxgears",
