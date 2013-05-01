@@ -57,6 +57,6 @@
 		"url": "https://github.com/ExactTarget/fuelux-gears/{version}/dist/fuelux-gears.zip",
 		"type": "directory"
 	},
-o	"css_prefix": "fueluxgears",
+	"css_prefix": "fueluxgears",
 	"app_display_name": "FuelUX Gears"
 }
