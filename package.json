@@ -53,10 +53,8 @@
 	"volo": {
 		"baseDir": "lib",
 		"dependencies": {
-
-			"underscore": "github:documentcloud/underscore/1.4.4"
 		},
-		"url": "https://raw.github.com/ExactTarget/fuelux-gears/master/dist/fuelux-gears.zip",
+		"url": "https://github.com/ExactTarget/fuelux-gears/{version}/dist/fuelux-gears/",
 		"type": "directory"
 	},
 	"css_prefix": "fueluxgears",
