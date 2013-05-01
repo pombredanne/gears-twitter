@@ -1,3 +1,4 @@
+/*jshint node: true */
 'use strict';
 
 var path = require( 'path' );
@@ -8,18 +9,90 @@ var mountFolder = function (express, dir) {
 	return express.static(require('path').resolve(dir));
 };
 
-
 module.exports = function( grunt ) {
 	// load all grunt tasks
 	require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
 	grunt.initConfig({
-		pkg: grunt.file.readJSON( 'package.json' ),
+		pkg: '<json:package.json>',
+		meta: {
+			banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+			'<%= grunt.template.today("yyyy-mm-dd") %>\n' +
+			'<%= pkg.homepage ? "* " + pkg.homepage + "\n" : "" %>' +
+			'* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
+			' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
+		},
+		// min: {
+		//	dist: {
+		//		src: ['<banner:meta.banner>', 'dist/all.js'],
+		//		dest: 'dist/all.min.js'
+		//	}
+		// },
+		watch: {
+			files: ['Gruntfile.js', 'lib/**', 'src/**', 'test/**'],
+			tasks: 'lint build'
+		},
+		clean: {
+			dist: ['dist/fuelux-gears'],
+			build: ['build'],
+			zip: ['dist/fuelux-gears.zip'],
+			zipsrc: ['dist/fuelux-gears']
+		},
+		copy: {
+			gearconfig: {
+				files: [
+					{
+						expand: true,
+						cwd: 'src/',
+						src: ['**/config.js'],
+						dest: 'build/'
+					}
+				]
+			},
+			dist: {
+				files: [
+					{
+						expand: true,
+						cwd: 'build/',
+						src: ['**/*'],
+						dest: 'dist/'
+					},
+					{
+						expand: true,
+						cwd: 'lib/',
+						src: ['**/*'],
+						dest: 'dist/'
+					}
+
+				]
+			},
+			zipsrc: {
+				expand: true,
+				cwd: 'dist/',
+				src: ['**/*'],
+				dest: 'dist/fuelux-gears'
+			}
+		},
+		compress: {
+			zip: {
+				files: [
+					{
+						expand: true,
+						cwd: 'dist/fuelux-gears/',
+						src: ['**'],
+						dest: 'fuelux-gears'
+					}
+				],
+				options: {
+					archive: 'dist/fuelux-gears.zip'
+				}
+			}
+		},
 		template: {
 			foursquare: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'dist/public/foursquare/edit.html',
+				dest: 'build/foursquare/edit.html',
 				variables: function () {
 					return {
 						body: grunt.file.read('src/foursquare/edit-body.html'),
@@ -32,7 +105,7 @@ module.exports = function( grunt ) {
 			googleMaps: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'dist/public/googleMaps/edit.html',
+				dest: 'build/googleMaps/edit.html',
 				variables: function () {
 					return {
 						body: grunt.file.read('src/googleMaps/edit-body.html'),
@@ -45,7 +118,7 @@ module.exports = function( grunt ) {
 			googleMapsButtons: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'dist/public/googleMapsButtons/edit.html',
+				dest: 'build/googleMapsButtons/edit.html',
 				variables: function () {
 					return {
 						body: grunt.file.read('src/googleMapsButtons/edit-body.html'),
@@ -58,7 +131,7 @@ module.exports = function( grunt ) {
 			googleMapsStealthEdit: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'dist/public/googleMapsStealth/edit.html',
+				dest: 'build/googleMapsStealth/edit.html',
 				variables: function () {
 					return {
 						body: grunt.file.read('src/googleMapsStealth/edit-body.html'),
@@ -71,7 +144,7 @@ module.exports = function( grunt ) {
 			googleMapsStealthDrop: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'dist/public/googleMapsStealth/drop.html',
+				dest: 'build/googleMapsStealth/drop.html',
 				variables: function () {
 					return {
 						body: grunt.file.read('src/googleMapsStealth/drop-body.html'),
@@ -84,7 +157,7 @@ module.exports = function( grunt ) {
 			rssFeed: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'dist/public/rssFeed/edit.html',
+				dest: 'build/rssFeed/edit.html',
 				variables: function () {
 					return {
 						body: grunt.file.read('src/rssFeed/edit-body.html'),
@@ -97,7 +170,7 @@ module.exports = function( grunt ) {
 			twitter: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'dist/public/twitter/edit.html',
+				dest: 'build/twitter/edit.html',
 				variables: function () {
 					return {
 						body: grunt.file.read('src/twitter/edit-body.html'),
@@ -110,7 +183,7 @@ module.exports = function( grunt ) {
 			youtubeEmbed: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'dist/public/youtubeEmbed/edit.html',
+				dest: 'build/youtubeEmbed/edit.html',
 				variables: function () {
 					return {
 						body: grunt.file.read('src/youtubeEmbed/edit-body.html'),
@@ -135,75 +208,46 @@ module.exports = function( grunt ) {
 				'Gruntfile.js',
 				'src/**/*.js'
 			]
-		},
-		copy: {
-			vendor: {
-				files: [
-					{
-						src: ['vendor/**'],
-						dest: 'dist/public/'
-					}
-				]
-			},
-			main: {
-				files: [
-					{
-						src: ['src/foursquare/config.js'],
-						dest: 'dist/public/foursquare/config.js'
-					},
-					{
-						src: ['src/googleMaps/config.js'],
-						dest: 'dist/public/googleMaps/config.js'
-					},
-					{
-						src: ['src/googleMapsButtons/config.js'],
-						dest: 'dist/public/googleMapsButtons/config.js'
-					},
-					{
-						src: ['src/googleMapsStealth/config.js'],
-						dest: 'dist/public/googleMapsStealth/config.js'
-					},
-					{
-						src: ['src/rssFeed/config.js'],
-						dest: 'dist/public/rssFeed/config.js'
-					},
-					{
-						src: ['src/twitter/config.js'],
-						dest: 'dist/public/twitter/config.js'
-					},
-					{
-						src: ['src/youtubeEmbed/config.js'],
-						dest: 'dist/public/youtubeEmbed/config.js'
-					}
-				]
-			}
 		}
 	});
 
 	// Register tasks
 	grunt.registerTask( 'default', [
+		'lint',
+		'build',
+		'dist',
+		'zip'
+	]);
+
+//	grunt.registerTask('default', 'lint qunit requirejs recess clean:dist min copy:zipsrc compress clean:zipsrc');
+
+	// Register tasks
+	grunt.registerTask( 'lint', [
 		'csslint',
-		'jshint',
-		'compileGears',
-		'copy:main'
+		'jshint'
 	]);
 
-	grunt.registerTask( 'compileGears', [
-		'template'
+	grunt.registerTask( 'build', [
+		'clean:build',
+		'template',
+		'copy:gearconfig'
 	]);
 
-	grunt.registerTask( 'vendorCopy', [
-		'copy:vendor'
+	grunt.registerTask( 'dist', [
+		'clean:dist',
+		'copy:dist'
+	]);
+
+	grunt.registerTask( 'zip', [
+		'clean:zip',
+		'clean:zipsrc',
+		'copy:zipsrc',
+		'compress:zip',
+		'clean:zipsrc'
 	]);
 
 	grunt.registerTask( 'test', [
-		'csslint',
-		'jshint'
-	]);
-
-	grunt.registerTask( 'clientSideTests', [
-		'csslint',
-		'jshint'
+		'lint'
 	]);
 
 };

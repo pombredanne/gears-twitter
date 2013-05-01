@@ -5,6 +5,7 @@ fuelux-gears
 correct 0 result set for text entries vs html entries
 live update via the update event
 validation of form fields/error messaging when missing required fields
+pull in fuelux-imhtheme
 
 ## Google Maps
 controls on map
