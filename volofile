@@ -1,6 +1,20 @@
 module.exports = {
 	onAdd: function (d, v) {
-		v.mv('dist/*', '/');
+		v.rm('stackato.yml');
+		v.rm('.csslintrc');
+		v.rm('.jshintrc');
+		v.rm('.jshintrc');
+		v.rm('Gruntfile.js');
+		v.rm('LICENSE-MIT');
+		v.rm('README.md');
+		v.rm('app.js');
+		v.rm('lib');
+		v.rm('node_modules');
+		v.rm('package.json');
+		v.rm('src');
+		v.rm('views');
+		v.mv('dist', '/');
+		v.rm('dist');
 		v.rm('volofile');
 		d.resolve();
 	}
