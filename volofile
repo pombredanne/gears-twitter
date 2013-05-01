@@ -13,7 +13,7 @@ module.exports = {
 		v.rm('package.json');
 		v.rm('src');
 		v.rm('views');
-		v.mv('dist', '/');
+		v.mv('dist', './');
 		v.rm('dist');
 		v.rm('volofile');
 		d.resolve();
