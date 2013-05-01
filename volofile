@@ -1,0 +1,7 @@
+module.exports = {
+	onAdd: function (d, v) {
+		v.mv('dist/*', '/');
+		v.rm('volofile');
+		d.resolve();
+	}
+};
