@@ -1,3 +1,4 @@
+/*global module */
 module.exports = {
 	onAdd: function (d, v) {
 		v.rm('stackato.yml');

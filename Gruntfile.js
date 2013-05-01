@@ -242,7 +242,8 @@ module.exports = function( grunt ) {
 		'clean:zip',
 		'clean:zipsrc',
 		'copy:zipsrc',
-		'compress:zip'
+		'compress:zip',
+		'clean:zipsrc'
 	]);
 
 	grunt.registerTask( 'test', [
