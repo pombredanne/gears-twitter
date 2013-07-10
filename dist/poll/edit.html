@@ -2,20 +2,17 @@
 <html class="fuelux">
 <head>
 	<meta charset="UTF-8">
-
 	<title>Gear: Poll</title>
-
 	<link href="http://fuelcdn.com/fuelux-imh/2.3.0/css/fuelux.min.css" rel="stylesheet">
-
 	
 
 	<script src="../jquery.min.js" type="text/javascript"></script>
 	<script src="../underscore.js" type="text/javascript"></script>
 	<script src="//internalcdn.xexacttargetapps.com/fuelux-gearapi/0.0.19/gear.min.js" type="text/javascript"></script>
 	<script src="//fuelcdn.com/fuelux-imh/2.3.0/loader.min.js" type="text/javascript"></script>
-
 	
 
+	
 	<script type="text/javascript">
 		/*global $, FUELUX_EDITOR, Handlebars */
 Handlebars.registerHelper('ifNotEquals', function(v1, v2, options) {
@@ -80,6 +77,9 @@ $(document).ready(function() {
 });
 
 	</script>
+	
+
+	
 	<style>
 		/*csslint important: false*/
 body {
@@ -90,9 +90,12 @@ body {
 }
 
 	</style>
+	
+
 </head>
 <body>
-<div id="form"></div>
+	
+		<div id="form"></div>
 
 <!-- template for gear palette -->
 <script id="gear-template" type="text/x-handlebars-template">
@@ -117,6 +120,7 @@ body {
 	<div><button type="button">Vote</button> <a href="#">View results</a></div>
 </script>
 
+	
 </body>
 </html>
 

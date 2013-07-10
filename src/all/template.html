@@ -2,33 +2,37 @@
 <html class="fuelux">
 <head>
 	<meta charset="UTF-8">
-
 	<title>Gear: {{title}}</title>
-
 	<link href="http://fuelcdn.com/fuelux-imh/2.3.0/css/fuelux.min.css" rel="stylesheet">
-
 	{{#if external-styles}}
-	{{{external-styles}}}
-    {{/if}}
+		{{{external-styles}}}
+	{{/if}}
 
 	<script src="../jquery.min.js" type="text/javascript"></script>
 	<script src="../underscore.js" type="text/javascript"></script>
 	<script src="//internalcdn.xexacttargetapps.com/fuelux-gearapi/0.0.19/gear.min.js" type="text/javascript"></script>
 	<script src="//fuelcdn.com/fuelux-imh/2.3.0/loader.min.js" type="text/javascript"></script>
-
 	{{#if external-script}}
-	{{{external-script}}}
-    {{/if}}
+		{{{external-script}}}
+	{{/if}}
 
+	{{#if script}}
 	<script type="text/javascript">
 		{{{script}}}
 	</script>
+	{{/if}}
+
+	{{#if style}}
 	<style>
 		{{{style}}}
 	</style>
+	{{/if}}
+
 </head>
 <body>
-{{{body}}}
+	{{#if body}}
+		{{{body}}}
+	{{/if}}
 </body>
 </html>
 

@@ -49,12 +49,24 @@ module.exports = function( grunt ) {
 					}
 				]
 			},
+			// extra script and style files
 			externals: {
 				files: [
 					{
 						expand: true,
 						cwd: 'src/',
 						src: ['**/externals/**/*'],
+						dest: 'build/'
+					}
+				]
+			},
+			// since we know a specific name, can make a task for this folder
+			plugins: {
+				files: [
+					{
+						expand: true,
+						cwd: 'src/',
+						src: ['**/plugins/**/*'],
 						dest: 'build/'
 					}
 				]
@@ -217,6 +229,30 @@ module.exports = function( grunt ) {
 					};
 				}
 			},
+			textPlusImage: {
+				src: 'src/all/template.html',
+				engine: "handlebars",
+				dest: 'build/textPlusImage/edit.html',
+				variables: function () {
+					return {
+						script: grunt.file.read('src/textPlusImage/edit-script.js'),
+						title: 'Text Plus Image'
+					};
+				}
+			},
+			textPlusImageDrop: {
+				src: 'src/all/template.html',
+				engine: "handlebars",
+				dest: 'build/textPlusImage/drop.html',
+				variables: function () {
+					return {
+						body: grunt.file.read('src/textPlusImage/drop-body.html'),
+						script: grunt.file.read('src/textPlusImage/drop-script.js'),
+						style: grunt.file.read('src/textPlusImage/drop-style.css'),
+						title: 'Text Plus Image'
+					};
+				}
+			},
 			twitter: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
@@ -281,7 +317,8 @@ module.exports = function( grunt ) {
 		'clean:build',
 		'template',
 		'copy:gearconfig',
-		'copy:externals'
+		'copy:externals',
+		'copy:plugins'
 	]);
 
 	grunt.registerTask( 'dist', [
