@@ -1,0 +1,7 @@
+/*csslint important: false*/
+body {
+	background-color: #f3f3f3 !important;
+}
+.remove-answer {
+	cursor: pointer;
+}

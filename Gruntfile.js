@@ -191,6 +191,19 @@ module.exports = function( grunt ) {
 					};
 				}
 			},
+			poll: {
+				src: 'src/all/template.html',
+				engine: "handlebars",
+				dest: 'build/poll/edit.html',
+				variables: function () {
+					return {
+						body: grunt.file.read('src/poll/edit-body.html'),
+						script: grunt.file.read('src/poll/edit-script.js'),
+						style: grunt.file.read('src/poll/edit-style.css'),
+						title: 'Poll'
+					};
+				}
+			},
 			rssFeed: {
 				src: 'src/all/template.html',
 				engine: "handlebars",

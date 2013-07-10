@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html class="fuelux">
+<head>
+	<meta charset="UTF-8">
+
+	<title>Gear: Poll</title>
+
+	<link href="http://fuelcdn.com/fuelux-imh/2.3.0/css/fuelux.min.css" rel="stylesheet">
+
+	
+
+	<script src="../jquery.min.js" type="text/javascript"></script>
+	<script src="../underscore.js" type="text/javascript"></script>
+	<script src="//internalcdn.xexacttargetapps.com/fuelux-gearapi/0.0.19/gear.min.js" type="text/javascript"></script>
+	<script src="//fuelcdn.com/fuelux-imh/2.3.0/loader.min.js" type="text/javascript"></script>
+
+	
+
+	<script type="text/javascript">
+		/*global $, FUELUX_EDITOR, Handlebars */
+Handlebars.registerHelper('ifNotEquals', function(v1, v2, options) {
+	if(v1 !== v2) {
+		return options.fn(this);
+	}
+	return options.inverse(this);
+});
+
+$(document).ready(function() {
+	// for the gear palette markup
+	var gearSource   = $("#gear-template").html();
+	var gearTemplate = Handlebars.compile(gearSource);
+
+	// for the gear output markup
+	var outputSource   = $("#output-template").html();
+	var outputTemplate = Handlebars.compile(outputSource);
+
+	FUELUX_EDITOR.trigger('resize', { height: 250, width:400 });
+	FUELUX_EDITOR.trigger('fetch', {});
+
+	// load gear, fires on response to the 'fetch' event
+	FUELUX_EDITOR.on('receive', function(e, details) {
+
+		// get the markup
+		var html = gearTemplate(details.gearData || {});
+		$('#form').html(html);
+
+		FUELUX_EDITOR.trigger('ready');
+	});
+
+	// close and populate editor with gear data
+	FUELUX_EDITOR.on('accept', function(e, details) {
+
+		// get all the answers
+		var answers = [];
+		$('#answers').find('input[type=text]').each(function(index, el) {
+			answers.push($(this).val());
+		});
+
+		// define the data/json
+		var data = {
+			question: $('#question').val(),
+			answers: answers
+		};
+
+		// get the markup
+		var html = outputTemplate(data);
+
+		FUELUX_EDITOR.trigger('done', {
+			content: html,
+			design: html,
+			gearData: data
+		});
+	});
+
+	$('body').on('click', '.remove-answer', function() {
+		$(this).parent().remove();
+	}).on('click', '#addBtn', function() {
+		$('#answers').append('<div class="input-append"><input type="text" /><span class="add-on remove-answer"><i class="icon-trash"></i></span></div>');
+	});
+});
+
+	</script>
+	<style>
+		/*csslint important: false*/
+body {
+	background-color: #f3f3f3 !important;
+}
+.remove-answer {
+	cursor: pointer;
+}
+
+	</style>
+</head>
+<body>
+<div id="form"></div>
+
+<!-- template for gear palette -->
+<script id="gear-template" type="text/x-handlebars-template">
+	<div>Enter your question</div>
+	<input type="text" id="question" value="{{question}}" />
+
+	<div>Answers:</div>
+	<div id="answers">
+			{{#each answers}}
+		<div class="input-append"><input type="text" value="{{this}}" />{{#ifNotEquals @index 0}}<span class="add-on remove-answer"><i class="icon-trash"></i></span>{{/ifNotEquals}}</div>
+			{{/each}}
+	</div>
+	<input type="button" class="btn" id="addBtn" value="Add Answer"/>
+</script>
+
+<!-- template for output -->
+<script id="output-template" type="text/x-handlebars-template">
+	<h4>{{question}}</h4>
+		{{#each answers}}
+	<label><input type="radio" name="poll" /> {{this}}</label><br/>
+		{{/each}}
+	<div><button type="button">Vote</button> <a href="#">View results</a></div>
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+<div id="form"></div>
+
+<!-- template for gear palette -->
+<script id="gear-template" type="text/x-handlebars-template">
+	<div>Enter your question</div>
+	<input type="text" id="question" value="{{question}}" />
+
+	<div>Answers:</div>
+	<div id="answers">
+			{{#each answers}}
+		<div class="input-append"><input type="text" value="{{this}}" />{{#ifNotEquals @index 0}}<span class="add-on remove-answer"><i class="icon-trash"></i></span>{{/ifNotEquals}}</div>
+			{{/each}}
+	</div>
+	<input type="button" class="btn" id="addBtn" value="Add Answer"/>
+</script>
+
+<!-- template for output -->
+<script id="output-template" type="text/x-handlebars-template">
+	<h4>{{question}}</h4>
+		{{#each answers}}
+	<label><input type="radio" name="poll" /> {{this}}</label><br/>
+		{{/each}}
+	<div><button type="button">Vote</button> <a href="#">View results</a></div>
+</script>
