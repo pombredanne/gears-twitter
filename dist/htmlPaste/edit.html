@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html class="fuelux">
+<head>
+	<meta charset="UTF-8">
+
+	<title>Gear: HTML Paste</title>
+
+	<link href="http://fuelcdn.com/fuelux-imh/2.3.0/css/fuelux.min.css" rel="stylesheet">
+
+	
+	<link href="externals/codemirror/codemirror.css" rel="stylesheet" />
+<link href="externals/codemirror/ambiance.css" rel="stylesheet" />
+
+    
+
+	<script src="../jquery.min.js" type="text/javascript"></script>
+	<script src="../underscore.js" type="text/javascript"></script>
+	<script src="//internalcdn.xexacttargetapps.com/fuelux-gearapi/0.0.19/gear.min.js" type="text/javascript"></script>
+	<script src="//fuelcdn.com/fuelux-imh/2.3.0/loader.min.js" type="text/javascript"></script>
+
+	
+	<script src="externals/codemirror/codemirror.js"></script>
+<script src="externals/codemirror/xml.js"></script>
+
+    
+
+	<script type="text/javascript">
+		/*global $, FUELUX_EDITOR, CodeMirror */
+$(document).ready(function() {
+
+  // configure CodeMirror
+  var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+    lineNumbers: true,
+    mode: {name: "xml", alignCDATA: true},
+    theme: 'ambiance'
+  });
+
+  FUELUX_EDITOR.trigger('resize', { height: 250, width:400 });
+  FUELUX_EDITOR.trigger('fetch', {});
+
+  // load gear, fires on response to the 'fetch' event
+  FUELUX_EDITOR.on('receive', function(e, details) {
+
+    console.log(details.content);
+    editor.setValue(details.content);
+
+    FUELUX_EDITOR.trigger('ready');
+  });
+
+  // close and populate editor with gear data
+  FUELUX_EDITOR.on('accept', function(e, details) {
+
+    var html = editor.getValue();
+
+    FUELUX_EDITOR.trigger('done', {
+      content: html,
+      design: html,
+      gearData: {}
+    });
+  });
+});
+
+	</script>
+	<style>
+		/*csslint important: false*/
+body {
+    background-color: #f3f3f3 !important;
+}
+.CodeMirror {
+    font-size: 12px;
+}
+
+	</style>
+</head>
+<body>
+<textarea id="code" name="code"></textarea>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

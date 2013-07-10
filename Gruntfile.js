@@ -49,6 +49,16 @@ module.exports = function( grunt ) {
 					}
 				]
 			},
+			externals: {
+				files: [
+					{
+						expand: true,
+						cwd: 'src/',
+						src: ['**/externals/**/*'],
+						dest: 'build/'
+					}
+				]
+			},
 			dist: {
 				files: [
 					{
@@ -89,6 +99,19 @@ module.exports = function( grunt ) {
 			}
 		},
 		template: {
+			flickr: {
+				src: 'src/all/template.html',
+				engine: "handlebars",
+				dest: 'build/flickr/edit.html',
+				variables: function () {
+					return {
+						body: grunt.file.read('src/flickr/edit-body.html'),
+						script: grunt.file.read('src/flickr/edit-script.js'),
+						style: grunt.file.read('src/flickr/edit-style.css'),
+						title: 'Display Flickr Photos'
+					};
+				}
+			},
 			foursquare: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
@@ -99,6 +122,20 @@ module.exports = function( grunt ) {
 						script: grunt.file.read('src/foursquare/edit-script.js'),
 						style: grunt.file.read('src/foursquare/edit-style.css'),
 						title: 'Foursquare Nearby Venues'
+					};
+				}
+			},
+			htmlPaste: {
+				src: 'src/all/template.html',
+				engine: "handlebars",
+				dest: 'build/htmlPaste/edit.html',
+				variables: function () {
+					return {
+						body: grunt.file.read('src/htmlPaste/edit-body.html'),
+						'external-styles': grunt.file.read('src/htmlPaste/external-styles.html'),
+						'external-script': grunt.file.read('src/htmlPaste/external-script.html'),						script: grunt.file.read('src/htmlPaste/edit-script.js'),
+						style: grunt.file.read('src/htmlPaste/edit-style.css'),
+						title: 'HTML Paste'
 					};
 				}
 			},
@@ -198,7 +235,7 @@ module.exports = function( grunt ) {
 			options: {
 				csslintrc: '.csslintrc'
 			},
-			src: ['src/**/*.css']
+			src: ['src/**/*-style.css']
 		},
 		jshint: {
 			options: {
@@ -206,7 +243,7 @@ module.exports = function( grunt ) {
 			},
 			all_files: [
 				'Gruntfile.js',
-				'src/**/*.js'
+				'src/**/*-script.js'
 			]
 		}
 	});
@@ -230,7 +267,8 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'build', [
 		'clean:build',
 		'template',
-		'copy:gearconfig'
+		'copy:gearconfig',
+		'copy:externals'
 	]);
 
 	grunt.registerTask( 'dist', [

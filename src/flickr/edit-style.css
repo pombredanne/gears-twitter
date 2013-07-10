@@ -1,0 +1,20 @@
+/*csslint important: false*/
+body {
+	background-color: #f3f3f3 !important;
+}
+.thumbnail {
+	float:left;
+	margin: 3px;
+	background-color: #fff;
+}
+.thumbnail .inner {
+	width: 100px;
+	height: 100px;
+
+	filter: alpha(opacity=60);
+	opacity: .60;
+}
+.thumbnail-active .inner {
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
