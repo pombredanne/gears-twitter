@@ -14,6 +14,7 @@ module.exports = {
 		v.rm('package.json');
 		v.rm('src');
 		v.rm('views');
+		v.rm('dist/fuelux-gears.zip');
 		v.copyDir('dist', './');
 		v.rm('dist');
 		v.rm('volofile');
