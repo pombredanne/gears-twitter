@@ -192,41 +192,15 @@ module.exports = function( grunt ) {
 					};
 				}
 			},
-			googleMapsButtons: {
+			googleMapsDrop: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'build/googleMapsButtons/edit.html',
+				dest: 'build/googleMaps/drop.html',
 				variables: function () {
 					return {
-						body: grunt.file.read('src/googleMapsButtons/edit-body.html'),
-						script: grunt.file.read('src/googleMapsButtons/edit-script.js'),
-						style: grunt.file.read('src/googleMapsButtons/edit-style.css'),
-						title: 'Google Maps'
-					};
-				}
-			},
-			googleMapsStealthEdit: {
-				src: 'src/all/template.html',
-				engine: "handlebars",
-				dest: 'build/googleMapsStealth/edit.html',
-				variables: function () {
-					return {
-						body: grunt.file.read('src/googleMapsStealth/edit-body.html'),
-						script: grunt.file.read('src/googleMapsStealth/edit-script.js'),
-						style: grunt.file.read('src/googleMapsStealth/edit-style.css'),
-						title: 'Google Maps'
-					};
-				}
-			},
-			googleMapsStealthDrop: {
-				src: 'src/all/template.html',
-				engine: "handlebars",
-				dest: 'build/googleMapsStealth/drop.html',
-				variables: function () {
-					return {
-						body: grunt.file.read('src/googleMapsStealth/drop-body.html'),
-						script: grunt.file.read('src/googleMapsStealth/drop-script.js'),
-						style: grunt.file.read('src/googleMapsStealth/drop-style.css'),
+						body: grunt.file.read('src/googleMaps/drop-body.html'),
+						script: grunt.file.read('src/googleMaps/drop-script.js'),
+						style: grunt.file.read('src/googleMaps/drop-style.css'),
 						title: 'Google Maps'
 					};
 				}
