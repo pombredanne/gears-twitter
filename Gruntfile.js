@@ -22,23 +22,39 @@ module.exports = function( grunt ) {
 			'* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
 			' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
 		},
-		// min: {
-		//	dist: {
-		//		src: ['<banner:meta.banner>', 'dist/all.js'],
-		//		dest: 'dist/all.min.js'
-		//	}
-		// },
 		watch: {
 			files: ['Gruntfile.js', 'lib/**', 'src/**', 'test/**'],
 			tasks: 'lint build'
 		},
 		clean: {
 			dist: ['dist/fuelux-gears'],
+			// happens before build but not till after dist
 			build: ['build'],
+			// when built, we copy these to a new directory and remove these
+			experimental: ['dist/flickr', 'dist/poll'],
 			zip: ['dist/fuelux-gears.zip'],
 			zipsrc: ['dist/fuelux-gears']
 		},
 		copy: {
+			// after creating dist folders, copy exp gears to new directory
+			experimental: {
+				files: [
+					{
+						expand: true,
+						cwd: 'dist/flickr',
+						src: ['**/*'],
+						dest: 'dist/experimental/flickr'
+					},
+					{
+						expand: true,
+						cwd: 'dist/poll',
+						src: ['**/*'],
+						dest: 'dist/experimental/poll'
+					}
+
+				]
+			},
+			// direct copy of the config.js files as part of build process
 			gearconfig: {
 				files: [
 					{
@@ -49,7 +65,7 @@ module.exports = function( grunt ) {
 					}
 				]
 			},
-			// extra script and style files
+			// extra script and style files as part of build process
 			externals: {
 				files: [
 					{
@@ -60,7 +76,7 @@ module.exports = function( grunt ) {
 					}
 				]
 			},
-			// since we know a specific name, can make a task for this folder
+			// plugins have to be in certain folder, also part of build process
 			plugins: {
 				files: [
 					{
@@ -71,6 +87,7 @@ module.exports = function( grunt ) {
 					}
 				]
 			},
+			// copies build files to dist
 			dist: {
 				files: [
 					{
@@ -313,6 +330,7 @@ module.exports = function( grunt ) {
 		'lint',
 		'build',
 		'dist',
+		'buildCleanup',
 		'zip'
 	]);
 
@@ -325,16 +343,22 @@ module.exports = function( grunt ) {
 	]);
 
 	grunt.registerTask( 'build', [
-		'clean:build',
+		'buildCleanup',
 		'template',
 		'copy:gearconfig',
 		'copy:externals',
 		'copy:plugins'
 	]);
 
+	grunt.registerTask( 'buildCleanup', [
+		'clean:build'
+	]);
+
 	grunt.registerTask( 'dist', [
 		'clean:dist',
-		'copy:dist'
+		'copy:dist',
+		'copy:experimental',
+		'clean:experimental'
 	]);
 
 	grunt.registerTask( 'zip', [
