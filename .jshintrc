@@ -6,8 +6,10 @@
 	"eqeqeq": true, 
 	"eqnull": true, 
 	"globals": {
+		"$": true,
 		"_": true, 
 		"define": true, 
+		"FUEL_EDITOR": true,
 		"require": true
 	}, 
 	"immed": true, 

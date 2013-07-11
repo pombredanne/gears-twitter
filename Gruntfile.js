@@ -124,6 +124,17 @@ module.exports = function( grunt ) {
 					};
 				}
 			},
+			flickrDrop: {
+				src: 'src/all/template.html',
+				engine: "handlebars",
+				dest: 'build/flickr/drop.html',
+				variables: function () {
+					return {
+						script: grunt.file.read('src/flickr/drop-script.js'),
+						title: 'Display Flickr Photos'
+					};
+				}
+			},
 			foursquare: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
