@@ -231,6 +231,17 @@ module.exports = function( grunt ) {
 					};
 				}
 			},
+			rssFeedDrop: {
+				src: 'src/all/template.html',
+				engine: "handlebars",
+				dest: 'build/rssFeed/drop.html',
+				variables: function () {
+					return {
+						script: grunt.file.read('src/rssFeed/drop-script.js'),
+						title: 'RSS Feed'
+					};
+				}
+			},
 			textPlusImage: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
@@ -268,19 +279,55 @@ module.exports = function( grunt ) {
 					};
 				}
 			},
-			youtubeEmbed: {
+			twitterDrop: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
-				dest: 'build/youtubeEmbed/edit.html',
+				dest: 'build/twitter/drop.html',
 				variables: function () {
 					return {
-						body: grunt.file.read('src/youtubeEmbed/edit-body.html'),
-						script: grunt.file.read('src/youtubeEmbed/edit-script.js'),
-						style: grunt.file.read('src/youtubeEmbed/edit-style.css'),
+						script: grunt.file.read('src/twitter/drop-script.js'),
+						title: 'Twitter User and Followers'
+					};
+				}
+			},
+			weather: {
+				src: 'src/all/template.html',
+				engine: "handlebars",
+				dest: 'build/weather/edit.html',
+				variables: function () {
+					return {
+						body: grunt.file.read('src/weather/edit-body.html'),
+						script: grunt.file.read('src/weather/edit-script.js'),
+						style: grunt.file.read('src/weather/edit-style.css'),
+						title: 'Weather'
+					};
+				}
+			},
+			youtube: {
+				src: 'src/all/template.html',
+				engine: "handlebars",
+				dest: 'build/youtube/edit.html',
+				variables: function () {
+					return {
+						body: grunt.file.read('src/youtube/edit-body.html'),
+						script: grunt.file.read('src/youtube/edit-script.js'),
+						style: grunt.file.read('src/youtube/edit-style.css'),
+						title: 'YouTube Embedded Video'
+					};
+				}
+			},
+			youtubeDrop: {
+				src: 'src/all/template.html',
+				engine: "handlebars",
+				dest: 'build/youtube/drop.html',
+				variables: function () {
+					return {
+						script: grunt.file.read('src/youtube/drop-script.js'),
 						title: 'YouTube Embedded Video'
 					};
 				}
 			}
+
 		},
 		csslint: {
 			options: {
