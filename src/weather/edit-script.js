@@ -26,8 +26,6 @@ $(document).ready(function() {
 
 	// load gear, fires on response to the 'fetch' event
 	FUELUX_EDITOR.on('receive', function(e, details) {
-		console.log('receive', details);
-
 		FUELUX_EDITOR.trigger('ready');
 	});
 
