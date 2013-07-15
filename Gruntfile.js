@@ -34,7 +34,7 @@ module.exports = function( grunt ) {
 			// happens before build but not till after dist
 			build: ['build'],
 			// when built, we copy these to a new directory and remove these
-			experimental: ['dist/flickr', 'dist/poll'],
+			experimental: ['dist/flickr', 'dist/foursquare', 'dist/poll'],
 			zip: ['dist/fuelux-gears.zip'],
 			zipsrc: ['dist/fuelux-gears']
 		},
@@ -72,6 +72,12 @@ module.exports = function( grunt ) {
 						cwd: 'dist/flickr',
 						src: ['**/*'],
 						dest: 'dist/experimental/flickr'
+					},
+					{
+						expand: true,
+						cwd: 'dist/foursquare',
+						src: ['**/*'],
+						dest: 'dist/experimental/foursquare'
 					},
 					{
 						expand: true,
@@ -189,23 +195,25 @@ module.exports = function( grunt ) {
 				variables: function () {
 					return {
 						body: grunt.file.read('src/foursquare/edit-body.html'),
+						experimental: true,
 						script: grunt.file.read('src/foursquare/edit-script.js'),
 						style: grunt.file.read('src/foursquare/edit-style.css'),
 						title: 'Foursquare Nearby Venues'
 					};
 				}
 			},
-			foursquareDrop: {
-				src: 'src/all/template.html',
-				engine: "handlebars",
-				dest: 'build/foursquare/drop.html',
-				variables: function () {
-					return {
-						script: grunt.file.read('src/foursquare/drop-script.js'),
-						title: 'Foursquare Nearby Venues'
-					};
-				}
-			},
+			// foursquareDrop: {
+			// 	src: 'src/all/template.html',
+			// 	engine: "handlebars",
+			// 	experimental: true,
+			// 	dest: 'build/foursquare/drop.html',
+			// 	variables: function () {
+			// 		return {
+			// 			script: grunt.file.read('src/foursquare/drop-script.js'),
+			// 			title: 'Foursquare Nearby Venues'
+			// 		};
+			// 	}
+			// },
 			htmlPaste: {
 				src: 'src/all/template.html',
 				engine: "handlebars",

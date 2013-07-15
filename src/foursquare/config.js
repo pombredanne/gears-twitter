@@ -1,9 +1,9 @@
 define([], function(){
 	return {
 		"drop": {
-			"mode": "stealth",
+			"mode": "palette",
 			"autoUpdate": "false",
-			"src": "drop.html"
+			"src": "edit.html"
 		},
 		"edit": {
 			"mode": "palette",
@@ -19,6 +19,6 @@ define([], function(){
 			}
 		},
 		"version": "0.0.1",
-		"viewTypes": ['*']
+		"viewTypes": ['text/html; kind=viewaswebpage', 'text/html; kind=htmlemailbody', 'text/html; kind=forwardtoafriend']
 	};
 });

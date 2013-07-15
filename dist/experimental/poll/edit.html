@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html class="fuelux">
   <head>
-	<meta charset="UTF-8">
-	<title>Gear: Poll</title>
+    <meta charset="UTF-8">
+    <title>Gear: Poll</title>
 	<link href="http://fuelcdn.com/fuelux-imh/2.3.0/css/fuelux.min.css" rel="stylesheet">
-	
+    
 
-	
+    
+	<script src="../../jquery.min.js" type="text/javascript"></script>
+	<script src="../../underscore.js" type="text/javascript"></script>
+    
 
-	
-	<script src="../jquery.min.js" type="text/javascript"></script>
-	<script src="../underscore.js" type="text/javascript"></script>
-	
+    
 
 	<script src="//internalcdn.xexacttargetapps.com/fuelux-gearapi/0.0.19/gear.min.js" type="text/javascript"></script>
 	<script src="//fuelcdn.com/fuelux-imh/2.3.0/loader.min.js" type="text/javascript"></script>
-	
+    
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.3/handlebars.min.js"></script>
+    
 
-	
-	<script type="text/javascript">
-	  /*global $, FUELUX_EDITOR, Handlebars */
+    
+    <script type="text/javascript">
+      /*global $, FUELUX_EDITOR, Handlebars */
 Handlebars.registerHelper('ifNotEquals', function(v1, v2, options) {
 	if(v1 !== v2) {
 		return options.fn(this);
@@ -81,12 +83,12 @@ $(document).ready(function() {
 	});
 });
 
-	</script>
-	
+    </script>
+    
 
-	
-	<style>
-	  /*csslint important: false*/
+    
+    <style type="text/css">
+      /*csslint important: false*/
 body {
 	background-color: #f3f3f3 !important;
 }
@@ -94,13 +96,13 @@ body {
 	cursor: pointer;
 }
 
-	</style>
-	
+    </style>
+    
 
   </head>
   <body>
-	
-		<div id="form"></div>
+    
+    <div id="form"></div>
 
 <!-- template for gear palette -->
 <script id="gear-template" type="text/x-handlebars-template">
@@ -125,7 +127,7 @@ body {
 	<div><button type="button">Vote</button> <a href="#">View results</a></div>
 </script>
 
-	
+    
   </body>
 </html>
 

@@ -1,56 +1,53 @@
 <!DOCTYPE html>
 <html class="fuelux">
   <head>
-	<meta charset="UTF-8">
-	<title>Gear: YouTube Embedded Video</title>
+    <meta charset="UTF-8">
+    <title>Gear: YouTube Embedded Video</title>
 	<link href="http://fuelcdn.com/fuelux-imh/2.3.0/css/fuelux.min.css" rel="stylesheet">
-	
+    
 
-	
+    
 
-	
+    
 	<script src="../jquery.min.js" type="text/javascript"></script>
 	<script src="../underscore.js" type="text/javascript"></script>
-	
+    
 
 	<script src="//internalcdn.xexacttargetapps.com/fuelux-gearapi/0.0.19/gear.min.js" type="text/javascript"></script>
 	<script src="//fuelcdn.com/fuelux-imh/2.3.0/loader.min.js" type="text/javascript"></script>
-	
+    
 
-	
-	<script type="text/javascript">
-	  /*global $, FUELUX_EDITOR */
-var defaults = {
-  vId: 'JjJMfwZOy54',
-  width: 200,
-  height: 200
-};
-
+    
+    <script type="text/javascript">
+      /*global $, FUELUX_EDITOR */
 $(document).ready(function(){
+	var defaults = {
+		vId: 'JjJMfwZOy54',
+		width: 200,
+		height: 200
+	};
 
-  $.getJSON('http://gdata.youtube.com/feeds/api/videos/'+ defaults.vId + '?v=2&alt=jsonc', function(jsonData, status, xhr){
+	$.getJSON('http://gdata.youtube.com/feeds/api/videos/'+ defaults.vId + '?v=2&alt=jsonc', function(jsonData, status, xhr){
 
-    console.log(jsonData);
+		var content = '<img src="' + jsonData.data.thumbnail.hqDefault + '" width="' + defaults.width + '" alt="' + jsonData.data.title + '" />';
 
-    var content = '<img src="' + jsonData.data.thumbnail.hqDefault + '" width="' + defaults.width + '" alt="' + jsonData.data.title + '" />';
-
-    FUELUX_EDITOR.trigger('done', {
-      content: 'default content',
-      design: content,
-      gearData: defaults
-    });
-  });
+		FUELUX_EDITOR.trigger('done', {
+			content: 'default content',
+			design: content,
+			gearData: defaults
+		});
+	});
 
 });
 
-	</script>
-	
+    </script>
+    
 
-	
+    
 
   </head>
   <body>
-	
+    
   </body>
 </html>
 
