@@ -1,3 +1,4 @@
+/*global module */
 /*jshint node: true */
 'use strict';
 
@@ -22,9 +23,11 @@ module.exports = function( grunt ) {
 			'* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
 			' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */'
 		},
-		watch: {
-			files: ['Gruntfile.js', 'lib/**', 'src/**', 'test/**'],
-			tasks: 'lint build'
+		csslint: {
+			options: {
+				csslintrc: '.csslintrc'
+			},
+			src: ['src/**/*-style.css']
 		},
 		clean: {
 			dist: ['dist/fuelux-gears'],
@@ -36,6 +39,31 @@ module.exports = function( grunt ) {
 			zipsrc: ['dist/fuelux-gears']
 		},
 		copy: {
+			// redo templates for local testing
+			preDevBuild: {
+				files: [
+					{
+						src: 'src/all/template.html',
+						dest: 'src/all/template-orig.html'
+					},
+					{
+						src: 'src/all/template-dev.html',
+						dest: 'src/all/template.html'
+					}
+				]
+			},
+			postDevBuild: {
+				files: [
+					{
+						src: 'src/all/template.html',
+						dest: 'src/all/template-dev.html'
+					},
+					{
+						src: 'src/all/template-orig.html',
+						dest: 'src/all/template.html'
+					}
+				]
+			},
 			// after creating dist folders, copy exp gears to new directory
 			experimental: {
 				files: [
@@ -129,6 +157,7 @@ module.exports = function( grunt ) {
 		},
 		template: {
 			flickr: {
+				experimental: true,
 				src: 'src/all/template.html',
 				engine: "handlebars",
 				dest: 'build/flickr/edit.html',
@@ -142,6 +171,7 @@ module.exports = function( grunt ) {
 				}
 			},
 			flickrDrop: {
+				experimental: true,
 				src: 'src/all/template.html',
 				engine: "handlebars",
 				dest: 'build/flickr/drop.html',
@@ -165,6 +195,17 @@ module.exports = function( grunt ) {
 					};
 				}
 			},
+			foursquareDrop: {
+				src: 'src/all/template.html',
+				engine: "handlebars",
+				dest: 'build/foursquare/drop.html',
+				variables: function () {
+					return {
+						script: grunt.file.read('src/foursquare/drop-script.js'),
+						title: 'Foursquare Nearby Venues'
+					};
+				}
+			},
 			htmlPaste: {
 				src: 'src/all/template.html',
 				engine: "handlebars",
@@ -173,7 +214,8 @@ module.exports = function( grunt ) {
 					return {
 						body: grunt.file.read('src/htmlPaste/edit-body.html'),
 						'external-styles': grunt.file.read('src/htmlPaste/external-styles.html'),
-						'external-script': grunt.file.read('src/htmlPaste/external-script.html'),						script: grunt.file.read('src/htmlPaste/edit-script.js'),
+						'external-script': grunt.file.read('src/htmlPaste/external-script.html'),
+						script: grunt.file.read('src/htmlPaste/edit-script.js'),
 						style: grunt.file.read('src/htmlPaste/edit-style.css'),
 						title: 'HTML Paste'
 					};
@@ -200,12 +242,12 @@ module.exports = function( grunt ) {
 					return {
 						body: grunt.file.read('src/googleMaps/drop-body.html'),
 						script: grunt.file.read('src/googleMaps/drop-script.js'),
-						style: grunt.file.read('src/googleMaps/drop-style.css'),
 						title: 'Google Maps'
 					};
 				}
 			},
 			poll: {
+				experimental: true,
 				src: 'src/all/template.html',
 				engine: "handlebars",
 				dest: 'build/poll/edit.html',
@@ -329,12 +371,6 @@ module.exports = function( grunt ) {
 			}
 
 		},
-		csslint: {
-			options: {
-				csslintrc: '.csslintrc'
-			},
-			src: ['src/**/*-style.css']
-		},
 		jshint: {
 			options: {
 				jshintrc: '.jshintrc'
@@ -343,7 +379,13 @@ module.exports = function( grunt ) {
 				'Gruntfile.js',
 				'src/**/*-script.js'
 			]
+		},
+
+		watch: {
+			files: ['Gruntfile.js', 'vendor/**', 'src/**', 'test/**'],
+			tasks: 'devOps'
 		}
+
 	});
 
 	// Register tasks
@@ -393,5 +435,18 @@ module.exports = function( grunt ) {
 	grunt.registerTask( 'test', [
 		'lint'
 	]);
+
+	grunt.registerTask('devOps', [
+		'lint',
+		'build',
+		'dist',
+		'buildCleanup'
+	]);
+
+	grunt.registerTask( 'dev', [
+		'devOps',
+		'watch'
+	]);
+
 
 };
