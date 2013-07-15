@@ -438,7 +438,6 @@ module.exports = function( grunt ) {
 	]);
 
 	grunt.registerTask('devOps', [
-		'copy:preDevBuild',
 		'lint',
 		'build',
 		'dist',
