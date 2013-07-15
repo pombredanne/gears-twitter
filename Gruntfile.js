@@ -254,6 +254,7 @@ module.exports = function( grunt ) {
 					return {
 						body: grunt.file.read('src/poll/edit-body.html'),
 						experimental: true,
+						'external-script': grunt.file.read('src/poll/external-script.html'),
 						script: grunt.file.read('src/poll/edit-script.js'),
 						style: grunt.file.read('src/poll/edit-style.css'),
 						title: 'Poll'
