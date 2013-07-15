@@ -157,13 +157,13 @@ module.exports = function( grunt ) {
 		},
 		template: {
 			flickr: {
-				experimental: true,
 				src: 'src/all/template.html',
 				engine: "handlebars",
 				dest: 'build/flickr/edit.html',
 				variables: function () {
 					return {
 						body: grunt.file.read('src/flickr/edit-body.html'),
+						experimental: true,
 						script: grunt.file.read('src/flickr/edit-script.js'),
 						style: grunt.file.read('src/flickr/edit-style.css'),
 						title: 'Display Flickr Photos'
@@ -171,12 +171,12 @@ module.exports = function( grunt ) {
 				}
 			},
 			flickrDrop: {
-				experimental: true,
 				src: 'src/all/template.html',
 				engine: "handlebars",
 				dest: 'build/flickr/drop.html',
 				variables: function () {
 					return {
+						experimental: true,
 						script: grunt.file.read('src/flickr/drop-script.js'),
 						title: 'Display Flickr Photos'
 					};
@@ -247,13 +247,13 @@ module.exports = function( grunt ) {
 				}
 			},
 			poll: {
-				experimental: true,
 				src: 'src/all/template.html',
 				engine: "handlebars",
 				dest: 'build/poll/edit.html',
 				variables: function () {
 					return {
 						body: grunt.file.read('src/poll/edit-body.html'),
+						experimental: true,
 						script: grunt.file.read('src/poll/edit-script.js'),
 						style: grunt.file.read('src/poll/edit-style.css'),
 						title: 'Poll'
@@ -437,6 +437,7 @@ module.exports = function( grunt ) {
 	]);
 
 	grunt.registerTask('devOps', [
+		'copy:preDevBuild',
 		'lint',
 		'build',
 		'dist',

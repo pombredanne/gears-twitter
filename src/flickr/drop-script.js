@@ -1,6 +1,4 @@
 /*global $, FUELUX_EDITOR */
-var _gearData;
-
 $(document).ready(function(){
 	FUELUX_EDITOR.trigger('resize', { height: 150 });
 	FUELUX_EDITOR.trigger('fetch');

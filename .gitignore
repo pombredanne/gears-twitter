@@ -4,6 +4,7 @@
 /public-optimized
 optimized
 build
+src/all/template-orig.html
 
 #############################
 # Node.js
