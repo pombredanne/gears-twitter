@@ -82,9 +82,11 @@ $(document).ready(function(){
 					content += '<div class="well text-error">JSON Error</div>';
 				} else {
 					if (
-						view === 'text/html; kind=viewaswebpage' || view === 'text/html; kind=htmlemailbody') {
-						content = getHtmlView(gearData, jsonData);
-					} else if (view === 'text/html; kind=forwardtoafriend') {
+						view === 'text/html; kind=viewaswebpage' ||
+							view === 'text/html; kind=htmlemailbody' ||
+							view === 'text/html; kind=web' ||
+							view === 'text/html; kind=forwardtoafriend'
+					) {
 						content = getHtmlView(gearData, jsonData);
 					} else if (view === 'text/plain; kind=textemailbody') {
 						content = getTextView(gearData, jsonData);
