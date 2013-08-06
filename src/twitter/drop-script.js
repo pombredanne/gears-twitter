@@ -8,10 +8,10 @@ $(document).ready(function(){
 
   //function getDesignView() {
   //	var address = defaults.address.replace(/\s/g, "+");
-  //	return '<img src="http://maps.googleapis.com/maps/api/staticmap?center=' + address + '&markers=' + address + '&zoom=' + defaults.zoom + '&size=' + defaults.width + 'x' + defaults.height + '&sensor=false"' + ' />';
+  //	return '<img src="https://maps.googleapis.com/maps/api/staticmap?center=' + address + '&markers=' + address + '&zoom=' + defaults.zoom + '&size=' + defaults.width + 'x' + defaults.height + '&sensor=false"' + ' />';
   //}
 
-  $.getJSON('http://twitter.com/users/' + defaults.username + '.json?callback=?', function(jsonData, status, xhr) {
+  $.getJSON('https://twitter.com/users/' + defaults.username + '.json?callback=?', function(jsonData, status, xhr) {
 
     // follow control wrapper html
     var content = '<div style="color:#333333;font:11px/18px Helvetica,Arial,sans-serif;overflow:hidden;text-align:left;white-space:nowrap;">';

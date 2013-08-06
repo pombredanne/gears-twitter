@@ -105,7 +105,7 @@ $(document).ready(function(){
 			FUELUX_EDITOR.trigger('done', { content: content, gearData: gearData });
 
 		} else {
-			$.getJSON('http://twitter.com/users/' + gearData.username + '.json?callback=?', function(jsonData,status,xhr) {
+			$.getJSON('https://twitter.com/users/' + gearData.username + '.json?callback=?', function(jsonData,status,xhr) {
 
 				if (status !== 'success') {
 					content += '<div class="well text-error">JSON Error</div>';

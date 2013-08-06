@@ -1,6 +1,6 @@
 /*global $, FUELUX_EDITOR */
 $(document).ready(function() {
-	var url = 'http://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d6d798f51bbd5ec0a1f9e9f1e62c43ab&format=json';
+	var url = 'https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=d6d798f51bbd5ec0a1f9e9f1e62c43ab&format=json';
 	var searchTerm = '';
 	var selectedImageUrl = '';
 
@@ -58,7 +58,7 @@ $(document).ready(function() {
 			var html = '';
 			for(var i=0; i<data.length; i++) {
 				var image = data[i];
-				var url = 'http://farm' + image.farm + '.staticflickr.com/' + image.server +  '/' + image.id + '_' + image.secret + '_t.jpg';
+				var url = 'https://farm' + image.farm + '.staticflickr.com/' + image.server +  '/' + image.id + '_' + image.secret + '_t.jpg';
 				html += '<div class="thumbnail" data-url="' + url + '"><div class="inner" style="background:url(' + url + ') center center no-repeat;"></div></div>';
 			}
 

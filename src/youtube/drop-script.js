@@ -6,7 +6,7 @@ $(document).ready(function(){
 		height: 200
 	};
 
-	$.getJSON('http://gdata.youtube.com/feeds/api/videos/'+ defaults.vId + '?v=2&alt=jsonc', function(jsonData, status, xhr){
+	$.getJSON('https://gdata.youtube.com/feeds/api/videos/'+ defaults.vId + '?v=2&alt=jsonc', function(jsonData, status, xhr){
 
 		var content = '<img src="' + jsonData.data.thumbnail.hqDefault + '" width="' + defaults.width + '" alt="' + jsonData.data.title + '" />';
 

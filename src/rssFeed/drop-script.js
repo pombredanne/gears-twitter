@@ -1,6 +1,6 @@
 /*global _, $, FUELUX_EDITOR */
 var defaults = {
-  feedurl: 'http://blog.exacttarget.com/blog/the-exacttarget-blog/rss',
+  feedurl: 'https://blog.exacttarget.com/blog/the-exacttarget-blog/rss',
   postcount: 5
 };
 

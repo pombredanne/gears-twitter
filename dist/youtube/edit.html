@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Gear: YouTube Embedded Video</title>
-	<link href="http://fuelcdn.com/fuelux-imh/2.3.0/css/fuelux.min.css" rel="stylesheet">
+	<link href="//fuelcdn.com/fuelux-imh/2.3.1/css/fuelux.min.css" rel="stylesheet">
     
 
     
@@ -14,7 +14,7 @@
     
 
 	<script src="//internalcdn.xexacttargetapps.com/fuelux-gearapi/0.0.19/gear.min.js" type="text/javascript"></script>
-	<script src="//fuelcdn.com/fuelux-imh/2.3.0/loader.min.js" type="text/javascript"></script>
+	<script src="//fuelcdn.com/fuelux-imh/2.3.1/loader.min.js" type="text/javascript"></script>
     
 
     
@@ -25,15 +25,15 @@ $(document).ready(function(){
 	var view;
 
 	function getWebView(gearData, jsonData) {
-		return '<iframe width="' + gearData.width + '" height="' + gearData.height + '" src="http://www.youtube.com/embed/' + gearData.vId + '" frameborder="0" title="' + jsonData.data.title + '"></iframe>';
+		return '<iframe width="' + gearData.width + '" height="' + gearData.height + '" src="https://www.youtube.com/embed/' + gearData.vId + '" frameborder="0" title="' + jsonData.data.title + '"></iframe>';
 	}
 
 	function getHtmlView(gearData, jsonData) {
-		return '<a href="http://www.youtube.com/watch?v=' + gearData.vId + '" target="_blank" title="Watch Video: ' + jsonData.data.title + '"><img src="' + jsonData.data.thumbnail.hqDefault + '" width="' + gearData.width + '" alt="' + jsonData.data.title + '" /></a>';
+		return '<a href="https://www.youtube.com/watch?v=' + gearData.vId + '" target="_blank" title="Watch Video: ' + jsonData.data.title + '"><img src="' + jsonData.data.thumbnail.hqDefault + '" width="' + gearData.width + '" alt="' + jsonData.data.title + '" /></a>';
 	}
 
 	function getTextView(gearData, jsonData) {
-		return jsonData.data.title + ': http://www.youtube.com/watch?v=' + gearData.vId;
+		return jsonData.data.title + ': https://www.youtube.com/watch?v=' + gearData.vId;
 	}
 
 	FUELUX_EDITOR.trigger('fetch');
@@ -77,7 +77,7 @@ $(document).ready(function(){
 			FUELUX_EDITOR.trigger('done', { content: content, gearData: gearData });
 
 		} else {
-			$.getJSON('http://gdata.youtube.com/feeds/api/videos/'+vId+'?v=2&alt=jsonc',function(jsonData,status,xhr){
+			$.getJSON('https://gdata.youtube.com/feeds/api/videos/'+vId+'?v=2&alt=jsonc',function(jsonData,status,xhr){
 				if (status !== 'success') { // json error
 					content += '<div class="well text-error">JSON Error</div>';
 				} else {
@@ -133,7 +133,7 @@ $(document).ready(function(){
     
     <h1>YouTube Video</h1>
 <p>Create an embedded YouTube video by completing the form.</p>
-<!-- <iframe width="267" height="200" src="http://www.youtube.com/embed/_YUugB4IUl4" frameborder="0" allowfullscreen></iframe> -->
+<!-- <iframe width="267" height="200" src="https://www.youtube.com/embed/_YUugB4IUl4" frameborder="0" allowfullscreen></iframe> -->
 <!-- <br /><br /> -->
 <div class="clearfix">
 	<label>Video ID: </label><input type="text" id="vidId" placeholder="_YUugB4IUl4" />

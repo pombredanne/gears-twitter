@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Gear: Twitter User and Followers</title>
-	<link href="http://fuelcdn.com/fuelux-imh/2.3.0/css/fuelux.min.css" rel="stylesheet">
+	<link href="//fuelcdn.com/fuelux-imh/2.3.1/css/fuelux.min.css" rel="stylesheet">
     
 
     
@@ -14,7 +14,7 @@
     
 
 	<script src="//internalcdn.xexacttargetapps.com/fuelux-gearapi/0.0.19/gear.min.js" type="text/javascript"></script>
-	<script src="//fuelcdn.com/fuelux-imh/2.3.0/loader.min.js" type="text/javascript"></script>
+	<script src="//fuelcdn.com/fuelux-imh/2.3.1/loader.min.js" type="text/javascript"></script>
     
 
     
@@ -126,7 +126,7 @@ $(document).ready(function(){
 			FUELUX_EDITOR.trigger('done', { content: content, gearData: gearData });
 
 		} else {
-			$.getJSON('http://twitter.com/users/' + gearData.username + '.json?callback=?', function(jsonData,status,xhr) {
+			$.getJSON('https://twitter.com/users/' + gearData.username + '.json?callback=?', function(jsonData,status,xhr) {
 
 				if (status !== 'success') {
 					content += '<div class="well text-error">JSON Error</div>';

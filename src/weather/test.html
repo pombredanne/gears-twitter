@@ -15,7 +15,7 @@
 		$(document).ready(function() {
 			$('#searchField').on('searched', function(event, searchText) {
 				$.ajax({
-					url : 'http://api.wunderground.com/api/a9098e8c1b9fb593/geolookup/conditions/q/IA/' + searchText + '.json',
+					url : 'https://api.wunderground.com/api/a9098e8c1b9fb593/geolookup/conditions/q/IA/' + searchText + '.json',
 					dataType : 'jsonp',
 					success : function(data) {
 						console.log(data);

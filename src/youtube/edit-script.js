@@ -4,15 +4,15 @@ $(document).ready(function(){
 	var view;
 
 	function getWebView(gearData, jsonData) {
-		return '<iframe width="' + gearData.width + '" height="' + gearData.height + '" src="http://www.youtube.com/embed/' + gearData.vId + '" frameborder="0" title="' + jsonData.data.title + '"></iframe>';
+		return '<iframe width="' + gearData.width + '" height="' + gearData.height + '" src="https://www.youtube.com/embed/' + gearData.vId + '" frameborder="0" title="' + jsonData.data.title + '"></iframe>';
 	}
 
 	function getHtmlView(gearData, jsonData) {
-		return '<a href="http://www.youtube.com/watch?v=' + gearData.vId + '" target="_blank" title="Watch Video: ' + jsonData.data.title + '"><img src="' + jsonData.data.thumbnail.hqDefault + '" width="' + gearData.width + '" alt="' + jsonData.data.title + '" /></a>';
+		return '<a href="https://www.youtube.com/watch?v=' + gearData.vId + '" target="_blank" title="Watch Video: ' + jsonData.data.title + '"><img src="' + jsonData.data.thumbnail.hqDefault + '" width="' + gearData.width + '" alt="' + jsonData.data.title + '" /></a>';
 	}
 
 	function getTextView(gearData, jsonData) {
-		return jsonData.data.title + ': http://www.youtube.com/watch?v=' + gearData.vId;
+		return jsonData.data.title + ': https://www.youtube.com/watch?v=' + gearData.vId;
 	}
 
 	FUELUX_EDITOR.trigger('fetch');
@@ -56,7 +56,7 @@ $(document).ready(function(){
 			FUELUX_EDITOR.trigger('done', { content: content, gearData: gearData });
 
 		} else {
-			$.getJSON('http://gdata.youtube.com/feeds/api/videos/'+vId+'?v=2&alt=jsonc',function(jsonData,status,xhr){
+			$.getJSON('https://gdata.youtube.com/feeds/api/videos/'+vId+'?v=2&alt=jsonc',function(jsonData,status,xhr){
 				if (status !== 'success') { // json error
 					content += '<div class="well text-error">JSON Error</div>';
 				} else {

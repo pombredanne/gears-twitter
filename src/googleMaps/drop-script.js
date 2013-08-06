@@ -11,7 +11,7 @@ $(document).ready(function(){
 	function getDesignView() {
 		var address = defaults.address.replace(/\s/g, '+');
 
-		return '<img src="http://maps.googleapis.com/maps/api/staticmap?center=' + address + '&markers=' + address + '&zoom=' + defaults.zoom + '&size=' + defaults.width + 'x' + defaults.height + '&sensor=false"' + ' />';
+		return '<img src="https://maps.googleapis.com/maps/api/staticmap?center=' + address + '&markers=' + address + '&zoom=' + defaults.zoom + '&size=' + defaults.width + 'x' + defaults.height + '&sensor=false"' + ' />';
 	}
 
 	FUELUX_EDITOR.trigger('done', {

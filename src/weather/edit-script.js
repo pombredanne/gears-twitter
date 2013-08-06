@@ -6,7 +6,7 @@ $(document).ready(function() {
 		zipcode = searchText;
 
 		$.ajax({
-			url : 'http://api.wunderground.com/api/a9098e8c1b9fb593/geolookup/conditions/q/IA/' + zipcode + '.json',
+			url : 'https://api.wunderground.com/api/a9098e8c1b9fb593/geolookup/conditions/q/IA/' + zipcode + '.json',
 			dataType : 'jsonp',
 			success : function(data) {
 				var location = data.location.city + ', ' + data.location.state;
