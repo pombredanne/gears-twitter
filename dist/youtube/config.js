@@ -1,5 +1,6 @@
 define([], function(){
 	return {
+        "category": "images-music-video",
 		"drop": {
 			"mode": "stealth",
 			"autoUpdate": "false",

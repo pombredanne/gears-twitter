@@ -1,5 +1,6 @@
 define([], function(){
 	return {
+        "category": "twitter",
 		"drop": {
 			"mode": "stealth",
 			"autoUpdate": "false",

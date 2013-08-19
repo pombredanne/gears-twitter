@@ -406,7 +406,7 @@ module.exports = function( grunt ) {
 		'zip'
 	]);
 
-	grunt.registerTask('default', 'lint qunit requirejs recess clean:dist min copy:zipsrc compress clean:zipsrc');
+//	grunt.registerTask('default', 'lint qunit requirejs recess clean:dist min copy:zipsrc compress clean:zipsrc');
 
 	// Register tasks
 	grunt.registerTask( 'lint', [
