@@ -1,5 +1,6 @@
 define([], function(){
 	return {
+        "category": "feeds",
 		"drop": {
 			"mode": "stealth",
 			"autoUpdate": "false",

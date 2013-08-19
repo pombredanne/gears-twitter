@@ -1,5 +1,6 @@
 define([], function(){
 	return {
+        "category": "location",
 		"drop": {
 			"mode": "palette",
 			"autoUpdate": "false",

@@ -176,6 +176,7 @@ packages/
 #############################
 # WebStorm
 #############################
+.idea/
 .idea/workspace.xml
 .idea/tasks.xml
 .iws
