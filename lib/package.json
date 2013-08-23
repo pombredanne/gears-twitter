@@ -1,0 +1,8 @@
+{
+  "volo": {
+    "baseDir": "./",
+    "dependencies": {
+      "gears-template": "github:ExactTarget/gears-template/master"
+    }
+  }
+}

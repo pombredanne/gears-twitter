@@ -1,0 +1,25 @@
+{
+	"boss": true, 
+	"browser": true, 
+	"curly": true, 
+	"devel": false, 
+	"eqeqeq": true, 
+	"eqnull": true, 
+	"globals": {
+		"$": true,
+		"_": true, 
+		"define": true, 
+		"FUEL_EDITOR": true,
+		"require": true
+	}, 
+	"immed": true, 
+	"jquery": true, 
+	"latedef": true, 
+	"newcap": true, 
+	"noarg": true, 
+	"node": true, 
+	"smarttabs": true,
+	"strict": false,
+	"sub": true, 
+	"undef": true
+}

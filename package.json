@@ -1,0 +1,52 @@
+{
+	"name": "gears-twitter",
+	"description": "Official ET Twitter",
+	"version": "0.2.2",
+	"homepage": "https://github.com/ExactTarget/gears-twitter",
+	"author": {
+		"url": "http://code.exacttarget.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/ExactTarget/gears-twitter.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ExactTarget/gears-twitter/issues"
+	},
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "https://github.com/ExactTarget/gears-twitter/blob/master/LICENSE-MIT"
+		}
+	],
+	"engines": {
+		"node": ">= 0.8.14"
+	},
+	"dependencies": {
+		"config": "0.4.20",
+		"hbs": "~1.0.5",
+		"underscore": "1.4.3"
+	},
+	"devDependencies": {
+		"handlebars": "~1.0.10",
+		"grunt": "~0.4.1",
+		"grunt-contrib-clean": "~0.4.0",
+		"grunt-contrib-compress": "~0.5.0",
+		"grunt-contrib-concat": "~0.1.3",
+		"grunt-contrib-copy": "~0.4.1",
+		"grunt-contrib-csslint": "~0.1.2",
+		"grunt-contrib-handlebars": "~0.5.8",
+		"grunt-contrib-jshint": "~0.3.0",
+		"grunt-contrib-requirejs": "~0.4.0",
+		"grunt-contrib-uglify": "~0.2.0",
+		"grunt-contrib-watch": "~0.3.1",
+		"grunt-templater": "~0.0.4",
+		"matchdep": "~0.1.1"
+	},
+	"keywords": [],
+	"volo": {
+		"url": "https://github.com/ExactTarget/gears-twitter/{version}/dist/gears-twitter.zip",
+		"type": "directory"
+	},
+	"gearsTemplate": "lib/gears-template"
+}
