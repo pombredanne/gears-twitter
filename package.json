@@ -45,7 +45,7 @@
 	},
 	"keywords": [],
 	"volo": {
-		"url": "https://github.com/ExactTarget/gears-twitter/{version}/dist/gears-twitter.zip",
+		"url": "https://raw.github.com/ExactTarget/gears-twitter/{version}/dist/gears-twitter.zip",
 		"type": "directory"
 	},
 	"gearsTemplate": "lib/gears-template"
